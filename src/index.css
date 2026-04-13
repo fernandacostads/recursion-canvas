@@ -1,0 +1,102 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+}
+
+/* BASE */
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Inter", "SF Pro Display", system-ui, sans-serif;
+  background: radial-gradient(circle at top, #1a1a1a, #0d0d0d);
+  color: #fff;
+}
+
+/* CANVAS */
+canvas {
+  display: block;
+}
+
+/* PAINEL (substitui #output) */
+.panel {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  padding: 16px;
+  border-radius: 16px;
+
+  background: rgba(30, 30, 30, 0.6);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  min-width: 220px;
+}
+
+/* LABELS */
+.panel label {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* INPUT RANGE */
+.panel input[type="range"] {
+  width: 100%;
+  margin-top: 4px;
+  accent-color: #6ee7ff;
+}
+
+/* SELECT */
+.panel select {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: none;
+
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+/* BUTTONS */
+.panel button {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: none;
+
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  color: white;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.panel button:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+/* LINKS */
+.panel a {
+  color: #6ee7ff;
+  text-decoration: none;
+}
+
+/* BRANCH COUNT (novo estilo) */
+.branch-count {
+  font-size: 11px;
+  opacity: 0.6;
+  letter-spacing: 1px;
+}
