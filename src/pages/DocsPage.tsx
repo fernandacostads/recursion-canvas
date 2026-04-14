@@ -1,84 +1,140 @@
+import { useEffect, useState } from "react";
+
+const sections = [
+  { id: "intro", label: "Introduction" },
+  { id: "how", label: "How it works" },
+  { id: "params", label: "Parameters" },
+  { id: "presets", label: "Presets" },
+];
+
 export default function DocsPage() {
+  const [active, setActive] = useState("intro");
+
+  useEffect(() => {
+    const handler = () => {
+      const scroll = window.scrollY;
+
+      for (const sec of sections) {
+        const el = document.getElementById(sec.id);
+        if (!el) continue;
+
+        if (scroll >= el.offsetTop - 100) {
+          setActive(sec.id);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handler);
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
+
   return (
-    <div className="docs">
-      <div className="docs-container">
-        <header className="docs-header">
+    <div className="docs-layout">
+      {/* SIDEBAR */}
+      <aside className="docs-sidebar">
+        <h2>Recursion</h2>
+
+        <nav>
+          {sections.map((s) => (
+            <a
+              key={s.id}
+              href={`#${s.id}`}
+              className={active === s.id ? "active" : ""}
+            >
+              {s.label}
+            </a>
+          ))}
+        </nav>
+
+        <button
+          className="back-btn"
+          onClick={() => (window.location.href = "/")}
+        >
+          ← Back
+        </button>
+      </aside>
+
+      {/* CONTENT */}
+      <main className="docs-content">
+        <section id="intro">
           <h1>Recursion</h1>
-          <p>Procedural branching experiment inspired by organic growth.</p>
-
-          <button onClick={() => (window.location.href = "/")}>
-            ← Back to simulation
-          </button>
-        </header>
-
-        <section>
-          <h2>🌱 How it works</h2>
           <p>
-            The system generates branches recursively. Each branch grows,
-            shrinks, and may spawn new branches based on probability.
+            A procedural branching system that simulates organic growth using
+            recursive structures and randomness.
+          </p>
+        </section>
+
+        <section id="how">
+          <h2>How it works</h2>
+
+          <p>
+            Each branch grows forward while slightly changing direction. Over
+            time, it shrinks and may spawn new branches.
           </p>
 
           <ul>
-            <li>Each branch has direction (theta)</li>
-            <li>Growth is affected by random wandering</li>
-            <li>Branches shrink over time</li>
-            <li>New branches spawn using divergence angles</li>
+            <li>Branches move using angle (theta)</li>
+            <li>Random wandering creates organic shapes</li>
+            <li>Scaling simulates natural decay</li>
+            <li>Branching uses divergence angles</li>
           </ul>
         </section>
 
-        <section>
-          <h2>⚙️ Parameters</h2>
+        <section id="params">
+          <h2>Parameters</h2>
 
           <div className="docs-grid">
             <div>
-              <h3>Structure</h3>
-              <p>
-                <b>NUM_BRANCHES</b> – initial trunks
-              </p>
-              <p>
-                <b>MAX_CONCURRENT</b> – max active branches
-              </p>
+              <h3>NUM_BRANCHES</h3>
+              <p>Initial number of trunks</p>
             </div>
 
             <div>
-              <h3>Growth</h3>
-              <p>
-                <b>MIN/MAX_GROWTH_RATE</b> – speed
-              </p>
-              <p>
-                <b>MIN/MAX_SHRINK_RATE</b> – decay
-              </p>
+              <h3>MAX_CONCURRENT</h3>
+              <p>Maximum branches alive at once</p>
             </div>
 
             <div>
-              <h3>Shape</h3>
-              <p>
-                <b>MIN/MAX_WANDER_STEP</b> – randomness
-              </p>
-              <p>
-                <b>MIN/MAX_DIVERGENCE</b> – branching angle
-              </p>
+              <h3>BRANCH_PROBABILITY</h3>
+              <p>Chance of creating a new branch</p>
             </div>
 
             <div>
-              <h3>Rendering</h3>
-              <p>
-                <b>RENDER_MODE</b> – visual style
-              </p>
-              <p>darkness / segmented / sketched</p>
+              <h3>WANDER_STEP</h3>
+              <p>Controls randomness in direction</p>
+            </div>
+
+            <div>
+              <h3>GROWTH_RATE</h3>
+              <p>Speed of expansion</p>
+            </div>
+
+            <div>
+              <h3>SHRINK_RATE</h3>
+              <p>Decay over time</p>
+            </div>
+
+            <div>
+              <h3>DIVERGENCE</h3>
+              <p>Angle between new branches</p>
+            </div>
+
+            <div>
+              <h3>RENDER_MODE</h3>
+              <p>Visual style of rendering</p>
             </div>
           </div>
         </section>
 
-        <section>
-          <h2>🎨 Presets</h2>
+        <section id="presets">
+          <h2>Presets</h2>
 
           <p>
-            Presets are curated parameter combinations that produce different
-            organic patterns like vines, roots, or abstract shapes.
+            Presets are predefined configurations that generate unique visual
+            patterns such as vines, roots, and abstract structures.
           </p>
         </section>
-      </div>
+      </main>
     </div>
   );
 }
