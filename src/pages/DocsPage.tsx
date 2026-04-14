@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import RandomnessDemo from "../components/RandomnessDemo";
 
 const sections = [
   { id: "intro", label: "Introduction" },
@@ -115,6 +116,13 @@ export default function DocsPage() {
             emerge from very small mathematical rules combined with randomness.
           </p>
 
+          <h4>Growth visualization:</h4>
+
+          <p>
+            This diagram shows how a single branch evolves over time using
+            growth, randomness, and decay.
+          </p>
+
           <h3>Deterministic rules</h3>
           <p>Each branch follows predictable equations at every frame:</p>
 
@@ -132,6 +140,14 @@ export default function DocsPage() {
           </pre>
 
           <h3>Randomness (stochastic behavior)</h3>
+
+          <h4>Interactive example:</h4>
+          <p>
+            Adjust the randomness (wander) and see how the path changes from
+            straight to chaotic.
+          </p>
+
+          <RandomnessDemo />
 
           <p>
             To avoid rigid and artificial patterns, randomness is introduced at
