@@ -258,3 +258,89 @@ canvas {
   opacity: 0.6;
   letter-spacing: 1px;
 }
+
+.docs {
+  height: 100%;
+  overflow-y: auto;
+
+  display: flex;
+  justify-content: center;
+
+  padding: 40px 20px;
+}
+
+.docs-container {
+  max-width: 900px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* HEADER */
+.docs-header {
+  padding: 24px;
+  border-radius: 20px;
+
+  background: rgba(30, 30, 30, 0.6);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.docs-header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.docs-header p {
+  opacity: 0.7;
+  margin: 8px 0 16px;
+}
+
+.docs-header button {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  color: white;
+  cursor: pointer;
+}
+
+/* SECTIONS */
+.docs section {
+  padding: 20px;
+  border-radius: 16px;
+
+  background: rgba(30, 30, 30, 0.5);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.docs h2 {
+  margin-top: 0;
+}
+
+.docs p {
+  opacity: 0.8;
+}
+
+/* GRID */
+.docs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.docs-grid div {
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
