@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const sections = [
   { id: "intro", label: "Introduction" },
   { id: "how", label: "How it works" },
+  { id: "math", label: "Mathematical Model" },
   { id: "params", label: "Parameters" },
   { id: "presets", label: "Presets" },
 ];
@@ -104,6 +105,78 @@ export default function DocsPage() {
             <li>Shrinks over time</li>
             <li>Eventually dies when too small</li>
           </ol>
+        </section>
+
+        <section id="math">
+          <h2>Mathematical Model</h2>
+
+          <p>
+            The system is based on a simple idea: complex organic behavior can
+            emerge from very small mathematical rules combined with randomness.
+          </p>
+
+          <h3>Deterministic rules</h3>
+          <p>Each branch follows predictable equations at every frame:</p>
+
+          <ul>
+            <li>Position is updated using trigonometry (cosine and sine)</li>
+            <li>Growth follows a constant rate</li>
+            <li>Scale decreases over time (shrink factor)</li>
+          </ul>
+
+          <p>In simplified form:</p>
+
+          <pre>
+            x += cos(theta) * growthRate y += sin(theta) * growthRate scale *=
+            shrinkRate
+          </pre>
+
+          <h3>Randomness (stochastic behavior)</h3>
+
+          <p>
+            To avoid rigid and artificial patterns, randomness is introduced at
+            key points in the system:
+          </p>
+
+          <ul>
+            <li>
+              <b>Wander</b> — small random changes in direction (theta)
+            </li>
+            <li>
+              <b>Branching probability</b> — determines if a new branch is
+              created
+            </li>
+            <li>
+              <b>Parameter ranges</b> — values like growth and shrink vary per
+              branch
+            </li>
+          </ul>
+
+          <h3>Emergent complexity</h3>
+
+          <p>
+            Individually, each rule is extremely simple. However, when hundreds
+            of branches interact over time, the result is complex,
+            natural-looking structures.
+          </p>
+
+          <p>
+            This phenomenon is known as <b>emergence</b>, where complexity
+            arises from the interaction of simple components.
+          </p>
+
+          <h3>Why it looks organic</h3>
+
+          <ul>
+            <li>No two branches behave exactly the same</li>
+            <li>Small variations accumulate over time</li>
+            <li>Growth + decay mimics natural systems</li>
+          </ul>
+
+          <p>
+            This combination of deterministic rules and controlled randomness is
+            what creates the illusion of life-like growth.
+          </p>
         </section>
 
         <section id="params">
