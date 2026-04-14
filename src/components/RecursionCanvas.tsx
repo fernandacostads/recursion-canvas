@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import ControlPanel from "./ControlPanel";
 
 // =====================
 // TYPES
@@ -44,166 +45,19 @@ const PRESETS: Record<string, Config> = {
     MIN_DIVERGENCE: 0.5101,
     MAX_DIVERGENCE: 0.37466,
   },
-  Fibrous: {
-    RENDER_MODE: "segmented",
-    BRANCH_PROBABILITY: 0.05,
-    MAX_CONCURRENT: 800,
-    NUM_BRANCHES: 3,
-    MIN_RADIUS: 0.1,
-    MAX_RADIUS: 50,
-    MIN_WANDER_STEP: 0.28,
-    MAX_WANDER_STEP: 0.7,
-    MIN_GROWTH_RATE: 5,
-    MAX_GROWTH_RATE: 9,
-    MIN_SHRINK_RATE: 0.98,
-    MAX_SHRINK_RATE: 0.99,
-    MIN_DIVERGENCE: 0.01,
-    MAX_DIVERGENCE: 0.05,
-  },
-  Graffiti: {
-    RENDER_MODE: "sketched",
-    BRANCH_PROBABILITY: 0.05,
-    MAX_CONCURRENT: 500,
-    NUM_BRANCHES: 6,
-    MIN_RADIUS: 0.15,
-    MAX_RADIUS: 70,
-    MIN_WANDER_STEP: 0.1197,
-    MAX_WANDER_STEP: 1.8269,
-    MIN_GROWTH_RATE: 13.66,
-    MAX_GROWTH_RATE: 17.35,
-    MIN_SHRINK_RATE: 0.95,
-    MAX_SHRINK_RATE: 0.98,
-    MIN_DIVERGENCE: 1.3268,
-    MAX_DIVERGENCE: 1.3885,
-  },
-  Knarled: {
-    RENDER_MODE: "darkness",
-    BRANCH_PROBABILITY: 0.09,
-    MAX_CONCURRENT: 500,
-    NUM_BRANCHES: 5,
-    MIN_RADIUS: 0.1,
-    MAX_RADIUS: 100,
-    MIN_WANDER_STEP: 0.1,
-    MAX_WANDER_STEP: 0.2,
-    MIN_GROWTH_RATE: 3.7,
-    MAX_GROWTH_RATE: 10,
-    MIN_SHRINK_RATE: 0.97,
-    MAX_SHRINK_RATE: 0.99,
-    MIN_DIVERGENCE: 0.01,
-    MAX_DIVERGENCE: 0.05,
-  },
-  "Beech Tree": {
-    RENDER_MODE: "darkness",
-    BRANCH_PROBABILITY: 0.085,
-    MAX_CONCURRENT: 500,
-    NUM_BRANCHES: 1,
-    MIN_RADIUS: 0.1,
-    MAX_RADIUS: 40,
-    MIN_WANDER_STEP: 0.1599,
-    MAX_WANDER_STEP: 0.4,
-    MIN_GROWTH_RATE: 8,
-    MAX_GROWTH_RATE: 15,
-    MIN_SHRINK_RATE: 0.98,
-    MAX_SHRINK_RATE: 0.982,
-    MIN_DIVERGENCE: 0.31,
-    MAX_DIVERGENCE: 0.87,
-  },
-  Frost: {
-    RENDER_MODE: "sketched",
-    BRANCH_PROBABILITY: 0.09,
-    MAX_CONCURRENT: 1000,
-    NUM_BRANCHES: 6,
-    MIN_RADIUS: 0.1,
-    MAX_RADIUS: 40,
-    MIN_WANDER_STEP: 0,
-    MAX_WANDER_STEP: 0,
-    MIN_GROWTH_RATE: 9.2,
-    MAX_GROWTH_RATE: 9.8,
-    MIN_SHRINK_RATE: 0.97,
-    MAX_SHRINK_RATE: 0.97,
-    MIN_DIVERGENCE: 0.4,
-    MAX_DIVERGENCE: 0.8,
-  },
-  Wooly: {
-    RENDER_MODE: "segmented",
-    BRANCH_PROBABILITY: 0.07,
-    MAX_CONCURRENT: 348,
-    NUM_BRANCHES: 9,
-    MIN_RADIUS: 1.5,
-    MAX_RADIUS: 99,
-    MIN_WANDER_STEP: 0.5093,
-    MAX_WANDER_STEP: 2.654,
-    MIN_GROWTH_RATE: 7.8279,
-    MAX_GROWTH_RATE: 18.2956,
-    MIN_SHRINK_RATE: 0.94489,
-    MAX_SHRINK_RATE: 0.98716,
-    MIN_DIVERGENCE: 1.4656,
-    MAX_DIVERGENCE: 2.6998,
-  },
-  "Vegetable Root": {
-    RENDER_MODE: "darkness",
-    BRANCH_PROBABILITY: 0.06,
-    MAX_CONCURRENT: 437,
-    NUM_BRANCHES: 1,
-    MIN_RADIUS: 0.1,
-    MAX_RADIUS: 100,
-    MIN_WANDER_STEP: 0.05,
-    MAX_WANDER_STEP: 0.25,
-    MIN_GROWTH_RATE: 5,
-    MAX_GROWTH_RATE: 9,
-    MIN_SHRINK_RATE: 0.98,
-    MAX_SHRINK_RATE: 0.99,
-    MIN_DIVERGENCE: 0,
-    MAX_DIVERGENCE: 0.1,
-  },
-  Hairball: {
-    RENDER_MODE: "sketched",
-    BRANCH_PROBABILITY: 0.6,
-    MAX_CONCURRENT: 800,
-    NUM_BRANCHES: 7,
-    MIN_RADIUS: 0.5,
-    MAX_RADIUS: 30,
-    MIN_WANDER_STEP: 0.1,
-    MAX_WANDER_STEP: 0.2,
-    MIN_GROWTH_RATE: 3.5,
-    MAX_GROWTH_RATE: 4.5,
-    MIN_SHRINK_RATE: 0.992,
-    MAX_SHRINK_RATE: 0.992,
-    MIN_DIVERGENCE: 2,
-    MAX_DIVERGENCE: 2.1,
-  },
-  Intenstines: {
-    RENDER_MODE: "darkness",
-    BRANCH_PROBABILITY: 1,
-    MAX_CONCURRENT: 350,
-    NUM_BRANCHES: 3,
-    MIN_RADIUS: 0.1,
-    MAX_RADIUS: 100,
-    MIN_WANDER_STEP: 0.1,
-    MAX_WANDER_STEP: 0.72,
-    MIN_GROWTH_RATE: 0.9,
-    MAX_GROWTH_RATE: 6.15,
-    MIN_SHRINK_RATE: 0.935,
-    MAX_SHRINK_RATE: 0.999,
-    MIN_DIVERGENCE: 0.01,
-    MAX_DIVERGENCE: 0.05,
-  },
 };
 
 // =====================
 // UTILS
 // =====================
 
-const random = (min: number, max: number) => {
-  if (min > max) [min, max] = [max, min];
-  return min + Math.random() * (max - min);
-};
+const random = (min: number, max: number) => min + Math.random() * (max - min);
 
 const TWO_PI = Math.PI * 2;
 const HALF_PI = Math.PI / 2;
 
 // =====================
-// BRANCH
+// BRANCH (FIEL)
 // =====================
 
 class Branch {
@@ -211,10 +65,19 @@ class Branch {
   y: number;
   ox: number;
   oy: number;
+
+  x1 = NaN;
+  x2 = NaN;
+  y1 = NaN;
+  y2 = NaN;
+
   theta: number;
   radius: number;
-  scale = 1;
+  scale: number;
+  generation: number;
+
   growing = true;
+  age = 0;
 
   wanderStep: number;
   growthRate: number;
@@ -226,11 +89,15 @@ class Branch {
     theta: number,
     radius: number,
     config: Config,
+    scale = 1,
+    generation = 1,
   ) {
     this.x = this.ox = x;
     this.y = this.oy = y;
     this.theta = theta;
     this.radius = radius;
+    this.scale = scale;
+    this.generation = generation;
 
     this.wanderStep = random(config.MIN_WANDER_STEP, config.MAX_WANDER_STEP);
     this.growthRate = random(config.MIN_GROWTH_RATE, config.MAX_GROWTH_RATE);
@@ -256,13 +123,20 @@ class Branch {
     ) {
       const offset = random(config.MIN_DIVERGENCE, config.MAX_DIVERGENCE);
 
+      const theta = this.theta + offset * (Math.random() < 0.5 ? 1 : -1);
+
+      const scale = this.scale * 0.95;
+      const radius = this.radius * scale;
+
       branches.push(
         new Branch(
           this.x,
           this.y,
-          this.theta + offset * (Math.random() < 0.5 ? 1 : -1),
-          this.radius * this.scale,
+          theta,
+          radius,
           config,
+          scale,
+          this.generation + 1,
         ),
       );
     }
@@ -270,24 +144,138 @@ class Branch {
     if (this.radius * this.scale <= config.MIN_RADIUS) {
       this.growing = false;
     }
+
+    this.age++;
   }
 
   render(ctx: CanvasRenderingContext2D, config: Config) {
     if (!this.growing) return;
 
-    ctx.beginPath();
-    ctx.moveTo(this.ox, this.oy);
-    ctx.lineTo(this.x, this.y);
+    let x1, x2, y1, y2;
+    let radius = this.radius * this.scale;
+    const scale = this.scale;
 
-    ctx.strokeStyle =
-      config.RENDER_MODE === "darkness"
-        ? "#fff"
-        : config.RENDER_MODE === "segmented"
-          ? "#000"
-          : "#ccc";
+    ctx.save();
 
-    ctx.lineWidth = this.radius * this.scale;
-    ctx.stroke();
+    switch (config.RENDER_MODE) {
+      case "segmented":
+        ctx.beginPath();
+        ctx.moveTo(this.ox, this.oy);
+        ctx.lineTo(this.x, this.y);
+
+        if (radius > 5) {
+          ctx.shadowOffsetX = 1;
+          ctx.shadowOffsetY = 1;
+          ctx.shadowBlur = scale;
+          ctx.shadowColor = "rgba(0,0,0,0.05)";
+        }
+
+        ctx.lineWidth = radius + scale;
+        ctx.strokeStyle = "#000";
+        ctx.lineCap = "round";
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(this.ox, this.oy);
+        ctx.lineTo(this.x, this.y);
+
+        ctx.lineWidth = radius;
+        ctx.strokeStyle = "#FFF";
+        ctx.stroke();
+        break;
+
+      case "sketched":
+        radius = radius * 0.5 + 0.5;
+
+        x1 = this.x + Math.cos(this.theta - HALF_PI) * radius;
+        x2 = this.x + Math.cos(this.theta + HALF_PI) * radius;
+        y1 = this.y + Math.sin(this.theta - HALF_PI) * radius;
+        y2 = this.y + Math.sin(this.theta + HALF_PI) * radius;
+
+        ctx.lineWidth = 0.5 + scale;
+        ctx.strokeStyle = "#000";
+        ctx.fillStyle = "#FFF";
+
+        if (this.generation === 1 && this.age === 1) {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, radius, 0, TWO_PI);
+          ctx.fill();
+          ctx.stroke();
+        }
+
+        if (this.age > 1) {
+          ctx.beginPath();
+          ctx.moveTo(this.x1, this.y1);
+          ctx.lineTo(x1, y1);
+          ctx.moveTo(this.x2, this.y2);
+          ctx.lineTo(x2, y2);
+          ctx.stroke();
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(this.x1, this.y1);
+        ctx.lineTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.lineTo(this.x2, this.y2);
+        ctx.closePath();
+        ctx.fill();
+
+        this.x1 = x1;
+        this.x2 = x2;
+        this.y1 = y1;
+        this.y2 = y2;
+        break;
+
+      case "darkness":
+        radius *= 0.5;
+
+        x1 = this.x + Math.cos(this.theta - HALF_PI) * radius;
+        x2 = this.x + Math.cos(this.theta + HALF_PI) * radius;
+        y1 = this.y + Math.sin(this.theta - HALF_PI) * radius;
+        y2 = this.y + Math.sin(this.theta + HALF_PI) * radius;
+
+        ctx.strokeStyle = "rgba(255,255,255,0.9)";
+        ctx.fillStyle = "#111";
+
+        if (this.generation === 1 && this.age === 1) {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, radius, 0, TWO_PI);
+          ctx.fill();
+          ctx.stroke();
+        }
+
+        if (scale > 0.05) {
+          ctx.shadowOffsetX = scale;
+          ctx.shadowOffsetY = scale;
+          ctx.shadowBlur = scale;
+          ctx.shadowColor = "#111";
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(this.x1, this.y1);
+        ctx.lineTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.lineTo(this.x2, this.y2);
+        ctx.closePath();
+        ctx.fill();
+
+        if (this.age > 1 && scale > 0.1) {
+          ctx.beginPath();
+          ctx.moveTo(this.x1, this.y1);
+          ctx.lineTo(x1, y1);
+          ctx.moveTo(this.x2, this.y2);
+          ctx.lineTo(x2, y2);
+          ctx.stroke();
+        }
+
+        this.x1 = x1;
+        this.x2 = x2;
+        this.y1 = y1;
+        this.y2 = y2;
+        break;
+    }
+
+    ctx.restore();
   }
 }
 
@@ -298,52 +286,64 @@ class Branch {
 export default function RecursionCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const branchesRef = useRef<Branch[]>([]);
-  const animationRef = useRef<number>(null);
+  const configRef = useRef<Config>(PRESETS["Vines"]);
+  const animationRef = useRef<number>();
 
-  const [config, setConfig] = useState<Config>(PRESETS["Vines"]);
-  const [branchCount, setBranchCount] = useState(0);
+  const [config, setConfig] = useState(PRESETS["Vines"]);
+
+  useEffect(() => {
+    configRef.current = config;
+  }, [config]);
 
   useEffect(() => {
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;
 
-    cancelAnimationFrame(animationRef.current!);
-    branchesRef.current = [];
-
-    let frame = 0;
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
     const spawn = (x: number, y: number) => {
-      for (let i = 0; i < config.NUM_BRANCHES; i++) {
-        const theta = (i / config.NUM_BRANCHES) * TWO_PI;
+      const cfg = configRef.current;
+
+      for (let i = 0; i < cfg.NUM_BRANCHES; i++) {
+        const theta = (i / cfg.NUM_BRANCHES) * TWO_PI;
+
         branchesRef.current.push(
-          new Branch(x, y, theta - HALF_PI, config.MAX_RADIUS, config),
+          new Branch(x, y, theta - HALF_PI, cfg.MAX_RADIUS, cfg),
         );
       }
+    };
+
+    const spawnCenter = () => {
+      spawn(window.innerWidth / 2, window.innerHeight / 2);
+    };
+
+    const resize = () => {
+      const scale = window.devicePixelRatio || 1;
+
+      canvas.width = window.innerWidth * scale;
+      canvas.height = window.innerHeight * scale;
+
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+
+      ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+      branchesRef.current = [];
+      spawnCenter();
     };
 
     const loop = () => {
       animationRef.current = requestAnimationFrame(loop);
 
+      const cfg = configRef.current;
+
       branchesRef.current.forEach((b) => {
-        b.update(branchesRef.current, config);
-        b.render(ctx, config);
+        b.update(branchesRef.current, cfg);
+        b.render(ctx, cfg);
       });
 
       branchesRef.current = branchesRef.current.filter((b) => b.growing);
-
-      frame++;
-      if (frame % 10 === 0) {
-        setBranchCount(branchesRef.current.length);
-      }
     };
 
     resize();
-    spawn(window.innerWidth / 2, window.innerHeight / 2);
     loop();
 
     const handleClick = (e: MouseEvent) => {
@@ -359,56 +359,37 @@ export default function RecursionCanvas() {
       canvas.removeEventListener("click", handleClick);
       window.removeEventListener("resize", resize);
     };
-  }, [config]);
-
-  const saveImage = () => {
-    const url = canvasRef.current!.toDataURL("image/png");
-    const win = window.open("");
-    win?.document.write(`<img src="${url}" />`);
-  };
+  }, []);
 
   return (
     <>
-      <div className="panel">
-        <label>Preset</label>
-        <select onChange={(e) => setConfig(PRESETS[e.target.value])}>
-          {Object.keys(PRESETS).map((p) => (
-            <option key={p}>{p}</option>
-          ))}
-        </select>
+      <ControlPanel
+        config={config}
+        setConfig={setConfig}
+        presets={PRESETS}
+        onReset={() => setConfig(PRESETS["Vines"])}
+        onClear={() => (branchesRef.current = [])}
+        onSave={() => {
+          const url = canvasRef.current!.toDataURL("image/png");
+          window.open(url);
+        }}
+        onRegenerate={() => {
+          branchesRef.current = [];
+          const canvas = canvasRef.current!;
+          const x = canvas.width / 2;
+          const y = canvas.height / 2;
 
-        <label>Branches: {config.NUM_BRANCHES}</label>
-        <input
-          type="range"
-          min={1}
-          max={20}
-          value={config.NUM_BRANCHES}
-          onChange={(e) =>
-            setConfig({ ...config, NUM_BRANCHES: +e.target.value })
+          const cfg = configRef.current;
+
+          for (let i = 0; i < cfg.NUM_BRANCHES; i++) {
+            const theta = (i / cfg.NUM_BRANCHES) * TWO_PI;
+
+            branchesRef.current.push(
+              new Branch(x, y, theta - HALF_PI, cfg.MAX_RADIUS, cfg),
+            );
           }
-        />
-
-        <label>Probability: {config.BRANCH_PROBABILITY.toFixed(2)}</label>
-        <input
-          type="range"
-          min={0}
-          max={1}
-          step={0.01}
-          value={config.BRANCH_PROBABILITY}
-          onChange={(e) =>
-            setConfig({
-              ...config,
-              BRANCH_PROBABILITY: +e.target.value,
-            })
-          }
-        />
-
-        <button onClick={() => setConfig(PRESETS["Vines"])}>Reset</button>
-
-        <button onClick={saveImage}>Save Image</button>
-
-        <div className="branch-count">Branches: {branchCount}</div>
-      </div>
+        }}
+      />
 
       <canvas ref={canvasRef} />
     </>
