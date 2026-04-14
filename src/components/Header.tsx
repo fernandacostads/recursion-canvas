@@ -1,4 +1,10 @@
-export default function Header() {
+interface Props {
+  fps: number;
+  branchCount: number;
+  onOpenDocs: () => void;
+}
+
+export default function Header({ fps, branchCount, onOpenDocs }: Props) {
   return (
     <header className="header">
       <div className="header-left">
@@ -6,9 +12,22 @@ export default function Header() {
         <span className="subtitle">Generative Art</span>
       </div>
 
+      <div className="header-center">
+        <div className="metric">
+          <span>FPS</span>
+          <strong>{fps}</strong>
+        </div>
+
+        <div className="metric">
+          <span>Branches</span>
+          <strong>{branchCount}</strong>
+        </div>
+      </div>
+
       <div className="header-right">
-        <span className="badge">Canvas</span>
-        <span className="badge">React + TS</span>
+        <button className="link-btn" onClick={onOpenDocs}>
+          How it works
+        </button>
       </div>
     </header>
   );

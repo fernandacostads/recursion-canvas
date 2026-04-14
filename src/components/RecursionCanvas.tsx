@@ -435,8 +435,15 @@ class Branch {
 // =====================
 // COMPONENT
 // =====================
+interface Props {
+  onFpsChange: (fps: number) => void;
+  onBranchCountChange: (branchCount: number) => void;
+}
 
-export default function RecursionCanvas() {
+export default function RecursionCanvas({
+  onFpsChange,
+  onBranchCountChange,
+}: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const branchesRef = useRef<Branch[]>([]);
   const configRef = useRef<Config>(PRESETS["Vines"]);
@@ -483,8 +490,25 @@ export default function RecursionCanvas() {
       spawnCenter();
     };
 
+    let lastTime = performance.now();
+    let frames = 0;
+
     const loop = () => {
       animationRef.current = requestAnimationFrame(loop);
+
+      const now = performance.now();
+      frames++;
+
+      // calcula FPS a cada 500ms
+      if (now - lastTime >= 500) {
+        const fps = Math.round((frames * 1000) / (now - lastTime));
+
+        onFpsChange(fps);
+        onBranchCountChange(branchesRef.current.length);
+
+        frames = 0;
+        lastTime = now;
+      }
 
       const cfg = configRef.current;
 
