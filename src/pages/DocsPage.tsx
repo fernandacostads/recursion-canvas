@@ -58,9 +58,16 @@ export default function DocsPage() {
       <main className="docs-content">
         <section id="intro">
           <h1>Recursion</h1>
+
           <p>
-            A procedural branching system that simulates organic growth using
-            recursive structures and randomness.
+            Recursion is a procedural branching system that simulates organic
+            growth using simple mathematical rules combined with randomness.
+          </p>
+
+          <p>
+            Inspired by natural structures such as trees, roots, veins, and
+            lightning, this system evolves over time by continuously spawning
+            and transforming branches.
           </p>
         </section>
 
@@ -68,60 +75,109 @@ export default function DocsPage() {
           <h2>How it works</h2>
 
           <p>
-            Each branch grows forward while slightly changing direction. Over
-            time, it shrinks and may spawn new branches.
+            Each branch is an independent entity that evolves frame by frame.
           </p>
 
+          <h3>Core principles</h3>
+
           <ul>
-            <li>Branches move using angle (theta)</li>
-            <li>Random wandering creates organic shapes</li>
-            <li>Scaling simulates natural decay</li>
-            <li>Branching uses divergence angles</li>
+            <li>
+              <b>Directional growth</b> — branches move using an angle (theta)
+            </li>
+            <li>
+              <b>Wandering</b> — small random variations create organic motion
+            </li>
+            <li>
+              <b>Scaling</b> — branches shrink as they grow
+            </li>
+            <li>
+              <b>Branching</b> — new branches spawn probabilistically
+            </li>
           </ul>
+
+          <h3>Lifecycle</h3>
+
+          <ol>
+            <li>Branch starts at a point</li>
+            <li>Moves forward based on angle</li>
+            <li>Slightly changes direction (wander)</li>
+            <li>Shrinks over time</li>
+            <li>Eventually dies when too small</li>
+          </ol>
         </section>
 
         <section id="params">
           <h2>Parameters</h2>
 
+          <p>
+            These parameters control the behavior and appearance of the system.
+          </p>
+
           <div className="docs-grid">
             <div>
               <h3>NUM_BRANCHES</h3>
-              <p>Initial number of trunks</p>
+              <p>Number of initial trunks spawned from origin.</p>
             </div>
 
             <div>
               <h3>MAX_CONCURRENT</h3>
-              <p>Maximum branches alive at once</p>
+              <p>
+                Maximum number of active branches at any given time. Acts as a
+                performance limiter.
+              </p>
             </div>
 
             <div>
               <h3>BRANCH_PROBABILITY</h3>
-              <p>Chance of creating a new branch</p>
+              <p>Probability of a branch spawning a new branch each frame.</p>
             </div>
 
             <div>
-              <h3>WANDER_STEP</h3>
-              <p>Controls randomness in direction</p>
+              <h3>MIN/MAX_RADIUS</h3>
+              <p>
+                Controls thickness of branches. Larger values create bolder
+                shapes.
+              </p>
             </div>
 
             <div>
-              <h3>GROWTH_RATE</h3>
-              <p>Speed of expansion</p>
+              <h3>MIN/MAX_WANDER_STEP</h3>
+              <p>
+                Controls how much direction changes over time. Higher values =
+                more chaotic movement.
+              </p>
             </div>
 
             <div>
-              <h3>SHRINK_RATE</h3>
-              <p>Decay over time</p>
+              <h3>MIN/MAX_GROWTH_RATE</h3>
+              <p>
+                Speed at which branches extend. Higher values = faster growth.
+              </p>
             </div>
 
             <div>
-              <h3>DIVERGENCE</h3>
-              <p>Angle between new branches</p>
+              <h3>MIN/MAX_SHRINK_RATE</h3>
+              <p>
+                How quickly branches shrink. Values closer to 1 = longer
+                lifespan.
+              </p>
+            </div>
+
+            <div>
+              <h3>MIN/MAX_DIVERGENCE</h3>
+              <p>
+                Angle difference when spawning new branches. Controls spread.
+              </p>
             </div>
 
             <div>
               <h3>RENDER_MODE</h3>
-              <p>Visual style of rendering</p>
+              <p>
+                Defines visual style:
+                <br />• <b>darkness</b> → filled organic shapes
+                <br />• <b>segmented</b> → layered strokes
+                <br />• <b>sketched</b> → hand-drawn look
+              </p>
             </div>
           </div>
         </section>
@@ -130,8 +186,33 @@ export default function DocsPage() {
           <h2>Presets</h2>
 
           <p>
-            Presets are predefined configurations that generate unique visual
-            patterns such as vines, roots, and abstract structures.
+            Presets are curated configurations designed to produce visually
+            interesting patterns.
+          </p>
+
+          <h3>Examples</h3>
+
+          <ul>
+            <li>
+              <b>Vines</b> → flowing organic tendrils
+            </li>
+            <li>
+              <b>Fibrous</b> → dense thread-like structures
+            </li>
+            <li>
+              <b>Graffiti</b> → chaotic artistic strokes
+            </li>
+            <li>
+              <b>Frost</b> → crystalline branching
+            </li>
+            <li>
+              <b>Hairball</b> → dense tangled mass
+            </li>
+          </ul>
+
+          <p>
+            Presets are a great starting point for exploration and can be
+            modified in real-time using the control panel.
           </p>
         </section>
       </main>
