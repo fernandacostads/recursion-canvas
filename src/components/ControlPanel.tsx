@@ -39,7 +39,7 @@ export default function ControlPanel({
 
   return (
     <div className="panel">
-      <h3>Recursion Controls</h3>
+      <h4>Recursion Controls</h4>
 
       {/* Presets */}
       <label>Preset</label>

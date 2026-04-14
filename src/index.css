@@ -16,6 +16,72 @@ body,
   color: #fff;
 }
 
+/* HEADER */
+.header {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 14px 18px;
+  border-radius: 16px;
+
+  background: rgba(30, 30, 30, 0.6);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  min-width: 240px;
+}
+
+/* LEFT */
+.header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-left h1 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+
+  background: linear-gradient(135deg, #6ee7ff, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 11px;
+  opacity: 0.6;
+  letter-spacing: 1px;
+}
+
+/* RIGHT */
+.header-right {
+  display: flex;
+  gap: 6px;
+}
+
+/* BADGES */
+.badge {
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  opacity: 0.8;
+}
+
 /* CANVAS */
 canvas {
   display: block;

@@ -1,5 +1,11 @@
+import Header from "./components/Header";
 import RecursionCanvas from "./components/RecursionCanvas";
 
 export default function App() {
-  return <RecursionCanvas />;
+  return (
+    <>
+      <Header />
+      <RecursionCanvas />
+    </>
+  );
 }
