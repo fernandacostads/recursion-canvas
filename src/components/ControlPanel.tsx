@@ -1,5 +1,3 @@
-import React from "react";
-
 interface Props {
   config: any;
   setConfig: (c: any) => void;
@@ -45,7 +43,7 @@ export default function ControlPanel({
 
       {/* Presets */}
       <label>Preset</label>
-      <select onChange={(e) => setConfig(presets[e.target.value])}>
+      <select onChange={(e) => setConfig({ ...presets[e.target.value] })}>
         {Object.keys(presets).map((p) => (
           <option key={p}>{p}</option>
         ))}
