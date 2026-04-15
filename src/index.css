@@ -338,8 +338,10 @@ canvas {
 
 /* GRID */
 .docs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(minmax(200px, fr));
   gap: 16px;
 }
 
@@ -354,7 +356,6 @@ canvas {
 .docs-grid div {
   padding: 14px;
   border-radius: 12px;
-
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.06);
 
@@ -486,6 +487,7 @@ canvas {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  width: 100%;
 }
 
 .tag {
@@ -497,4 +499,13 @@ canvas {
   background: linear-gradient(135deg, #5289e1ed, #06b5d4e9);
   border: 1px solid rgba(255, 255, 255, 0.08);
   width: fit-content;
+}
+
+.preview {
+  margin-top: 12px;
+}
+
+.preview canvas {
+  width: 100%;
+  height: auto;
 }

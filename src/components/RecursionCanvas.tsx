@@ -28,7 +28,7 @@ interface Config {
 // PRESETS
 // =====================
 
-const PRESETS: Record<string, Config> = {
+export const PRESETS: Record<string, Config> = {
   Vines: {
     RENDER_MODE: "darkness",
     BRANCH_PROBABILITY: 0.2572,

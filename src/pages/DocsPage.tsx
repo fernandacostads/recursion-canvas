@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import RandomnessDemo from "../components/RandomnessDemo";
+import MiniCanvasPreview from "../components/MiniCanvasPreview";
+import { PRESETS } from "../components/RecursionCanvas";
 
 const sections = [
   { id: "intro", label: "Introduction" },
@@ -202,12 +204,54 @@ export default function DocsPage() {
 
         <section id="render">
           <h2>Render Modes</h2>
-
           <p>
             The rendering mode defines how branches are visually represented on
             the canvas.
           </p>
+          <section id="render">
+            <h2>Render Modes</h2>
 
+            <div className="docs-grid">
+              <div className="doc-item">
+                <h3>darkness</h3>
+                <span className="tag">visual</span>
+
+                <p>Organic filled shapes with shadow blending.</p>
+
+                <div className="preview">
+                  <MiniCanvasPreview
+                    config={{ ...PRESETS.Hairball, RENDER_MODE: "darkness" }}
+                  />
+                </div>
+              </div>
+
+              <div className="doc-item">
+                <h3>segmented</h3>
+                <span className="tag">visual</span>
+
+                <p>Layered strokes with light borders.</p>
+
+                <div className="preview">
+                  <MiniCanvasPreview
+                    config={{ ...PRESETS.Fibrous, RENDER_MODE: "segmented" }}
+                  />
+                </div>
+              </div>
+
+              <div className="doc-item">
+                <h3>sketched</h3>
+                <span className="tag">visual</span>
+
+                <p>Hand-drawn organic look.</p>
+                <br />
+                <div className="preview">
+                  <MiniCanvasPreview
+                    config={{ ...PRESETS.Graffiti, RENDER_MODE: "sketched" }}
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
           <div className="docs-grid">
             <div className="doc-item">
               <h3>Darkness</h3>
