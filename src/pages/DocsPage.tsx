@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import RandomnessDemo from "../components/RandomnessDemo";
 import MiniCanvasPreview from "../components/MiniCanvasPreview";
-import { PRESETS } from "../components/RecursionCanvas";
 import { useNavigate } from "react-router-dom";
+import { PRESETS } from "../config/presets";
 
 const sections = [
   { id: "intro", label: "Introduction" },
