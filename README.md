@@ -18,7 +18,8 @@ Interactive canvas with real-time controls:
 
 ---
 
-## 🚀 Demo
+## 🚀 [Demo](https://fernandacostads.github.io/recursion-canvas/) 
+https://fernandacostads.github.io/recursion-canvas/
 
 > Run locally and explore the system in real-time.
 
