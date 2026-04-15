@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+
 import Header from "./components/Header";
 import RecursionCanvas from "./components/RecursionCanvas";
 import DocsPage from "./pages/DocsPage";
@@ -7,25 +9,30 @@ export default function App() {
   const [fps, setFps] = useState(0);
   const [branchCount, setBranchCount] = useState(0);
 
-  const path = window.location.pathname;
-
-  if (path === "/docs") {
-    return <DocsPage />;
-  }
+  const navigate = useNavigate();
 
   return (
     <>
-      <Header
-        fps={fps}
-        branchCount={branchCount}
-        onOpenDocs={() => {
-          window.location.href = "/docs";
-        }}
-      />
-      <RecursionCanvas
-        onFpsChange={setFps}
-        onBranchCountChange={setBranchCount}
-      />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Header
+                fps={fps}
+                branchCount={branchCount}
+                onOpenDocs={() => navigate("/docs")}
+              />
+              <RecursionCanvas
+                onFpsChange={setFps}
+                onBranchCountChange={setBranchCount}
+              />
+            </>
+          }
+        />
+
+        <Route path="/docs" element={<DocsPage />} />
+      </Routes>
     </>
   );
 }

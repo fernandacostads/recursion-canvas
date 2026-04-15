@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import RandomnessDemo from "../components/RandomnessDemo";
 import MiniCanvasPreview from "../components/MiniCanvasPreview";
 import { PRESETS } from "../components/RecursionCanvas";
+import { useNavigate } from "react-router-dom";
 
 const sections = [
   { id: "intro", label: "Introduction" },
@@ -18,6 +19,8 @@ const sections = [
 
 export default function DocsPage() {
   const [active, setActive] = useState("intro");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handler = () => {
@@ -55,10 +58,7 @@ export default function DocsPage() {
           ))}
         </nav>
 
-        <button
-          className="back-btn"
-          onClick={() => (window.location.href = "/")}
-        >
+        <button className="back-btn" onClick={() => navigate("/")}>
           ← Back
         </button>
       </aside>
