@@ -447,7 +447,7 @@ export default function RecursionCanvas({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const branchesRef = useRef<Branch[]>([]);
   const configRef = useRef<Config>(PRESETS["Vines"]);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | null>(null);
 
   const [config, setConfig] = useState(PRESETS["Vines"]);
 
