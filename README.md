@@ -1,73 +1,85 @@
-# React + TypeScript + Vite
+# 🌱 Recursion Canvas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A procedural branching system that simulates organic growth using simple mathematical rules combined with randomness.
 
-Currently, two official plugins are available:
+Inspired by natural structures like trees, roots, lightning, and veins, this project explores how complex patterns can emerge from minimal logic.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Preview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Interactive canvas with real-time controls:
 
-## Expanding the ESLint configuration
+- 🌿 Organic growth simulation
+- 🎛️ Fully configurable parameters
+- 🎨 Multiple render modes
+- ⚡ Real-time performance metrics (FPS / branches)
+- 🧪 Presets for instant exploration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Demo
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+> Run locally and explore the system in real-time.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🧠 Core Idea
+
+This project is based on a simple principle:
+
+> **Complex behavior can emerge from simple rules + randomness**
+
+Each "branch" is an independent entity that:
+
+1. Moves forward using an angle (`theta`)
+2. Slightly changes direction (wander)
+3. Shrinks over time
+4. Spawns new branches probabilistically
+5. Eventually dies
+
+---
+
+## ⚙️ Parameters
+
+| Parameter             | Description                  |
+| --------------------- | ---------------------------- |
+| `NUM_BRANCHES`        | Initial number of branches   |
+| `MAX_CONCURRENT`      | Max active branches          |
+| `BRANCH_PROBABILITY`  | Chance to spawn new branches |
+| `MIN/MAX_RADIUS`      | Thickness                    |
+| `MIN/MAX_WANDER_STEP` | Direction randomness         |
+| `MIN/MAX_GROWTH_RATE` | Growth speed                 |
+| `MIN/MAX_SHRINK_RATE` | Lifespan                     |
+| `MIN/MAX_DIVERGENCE`  | Spread angle                 |
+| `RENDER_MODE`         | Visual style                 |
+
+---
+
+## 🎨 Render Modes
+
+- darkness
+- segmented
+- sketched
+
+---
+
+## 🧪 Tech Stack
+
+- React + TypeScript
+- HTML5 Canvas
+
+---
+
+## ▶️ Getting Started
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🪪 License
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+MIT
