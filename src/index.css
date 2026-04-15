@@ -191,26 +191,22 @@ canvas {
 
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 
   padding: 16px;
   border-radius: 16px;
-
   background: rgba(30, 30, 30, 0.6);
   backdrop-filter: blur(12px);
-
   border: 1px solid rgba(255, 255, 255, 0.08);
-
   box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
-
   min-width: 220px;
 }
 
 /* LABELS */
 .panel label {
-  font-size: 12px;
+  font-size: 11px;
   opacity: 0.8;
 }
 
@@ -227,14 +223,14 @@ canvas {
   padding: 6px 8px;
   border-radius: 8px;
   border: none;
-
+  cursor: pointer;
   background: rgba(255, 255, 255, 0.05);
   color: #fff;
 }
 
 /* BUTTONS */
 .panel button {
-  padding: 8px 10px;
+  padding: 4px 10px;
   border-radius: 10px;
   border: none;
 
@@ -244,9 +240,13 @@ canvas {
   cursor: pointer;
   transition: 0.2s;
 }
+.buttons {
+  display: flex;
+  gap: 4px;
+}
 
 .panel button:hover {
-  transform: translateY(-1px);
+  transform: translateY(-0.2px);
   opacity: 0.9;
 }
 
@@ -372,6 +372,15 @@ canvas {
 .docs-layout {
   display: flex;
   height: 100vh;
+}
+
+.clickable {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.clickable:hover {
+  opacity: 0.85;
 }
 
 /* SIDEBAR */

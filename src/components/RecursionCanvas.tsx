@@ -367,6 +367,13 @@ export default function RecursionCanvas({
     };
   }, []);
 
+  function clearCanvas() {
+    const canvas = canvasRef.current!;
+    const ctx = canvas.getContext("2d")!;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
   return (
     <>
       <ControlPanel
@@ -374,7 +381,11 @@ export default function RecursionCanvas({
         setConfig={setConfig}
         presets={PRESETS}
         onReset={() => setConfig(PRESETS["Vines"])}
-        onClear={() => (branchesRef.current = [])}
+        onPause={() => (branchesRef.current = [])}
+        onClear={() => {
+          branchesRef.current.length = 0;
+          clearCanvas();
+        }}
         onSave={() => {
           const url = canvasRef.current!.toDataURL("image/png");
           window.open(url);

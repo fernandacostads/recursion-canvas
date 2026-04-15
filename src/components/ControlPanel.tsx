@@ -3,6 +3,7 @@ interface Props {
   setConfig: (c: any) => void;
   presets: Record<string, any>;
   onReset: () => void;
+  onPause: () => void;
   onClear: () => void;
   onSave: () => void;
   onRegenerate: () => void;
@@ -13,6 +14,7 @@ export default function ControlPanel({
   setConfig,
   presets,
   onReset,
+  onPause,
   onClear,
   onSave,
   onRegenerate,
@@ -83,6 +85,7 @@ export default function ControlPanel({
       {/* Buttons */}
       <div className="buttons">
         <button onClick={onReset}>Reset</button>
+        <button onClick={onPause}>Pause</button>
         <button onClick={onClear}>Clear</button>
         <button onClick={onRegenerate}>Regenerate</button>
         <button onClick={onSave}>Save PNG</button>

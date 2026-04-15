@@ -40,11 +40,19 @@ export default function DocsPage() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
+  const handleHomeClick = () => {
+    navigate("/");
+  };
+
   return (
     <div className="docs-layout">
       {/* SIDEBAR */}
       <aside className="docs-sidebar">
-        <h2>Recursion</h2>
+        <div className="header-left clickable" onClick={handleHomeClick}>
+          <h1>🔁 Recursion</h1>
+          <span className="subtitle"> Canvas</span>
+        </div>
+        <h3>Documentação</h3>
 
         <nav>
           {sections.map((s) => (
@@ -66,7 +74,7 @@ export default function DocsPage() {
       {/* CONTENT */}
       <main className="docs-content">
         <section id="intro">
-          <h1>Recursion</h1>
+          <h2>Recursion Canvas - Intro</h2>
 
           <p>
             Recursion is a procedural branching system that simulates organic
