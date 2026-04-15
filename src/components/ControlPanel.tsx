@@ -84,11 +84,11 @@ export default function ControlPanel({
 
       {/* Buttons */}
       <div className="buttons">
-        <button onClick={onReset}>Reset</button>
-        <button onClick={onPause}>Pause</button>
-        <button onClick={onClear}>Clear</button>
-        <button onClick={onRegenerate}>Regenerate</button>
-        <button onClick={onSave}>Save PNG</button>
+        <button onClick={onReset}>🔄 Reset</button>
+        <button onClick={onPause}>⏸ Pause</button>
+        <button onClick={onClear}>🧹 Clear</button>
+        <button onClick={onRegenerate}>🆕 New</button>
+        <button onClick={onSave}>💾 Save</button>
       </div>
     </div>
   );

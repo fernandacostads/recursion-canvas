@@ -279,6 +279,7 @@ export default function RecursionCanvas({
   const animationRef = useRef<number | null>(null);
 
   const [config, setConfig] = useState(PRESETS["Vines"]);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   useEffect(() => {
     configRef.current = config;
@@ -386,9 +387,15 @@ export default function RecursionCanvas({
           branchesRef.current.length = 0;
           clearCanvas();
         }}
+        // onSave={() => {
+        //   const url = canvasRef.current!.toDataURL("image/png");
+        //   window.open(url);
+        // }}
         onSave={() => {
-          const url = canvasRef.current!.toDataURL("image/png");
-          window.open(url);
+          const canvas = canvasRef.current!;
+          const url = canvas.toDataURL("image/png");
+
+          setPreviewUrl(url);
         }}
         onRegenerate={() => {
           branchesRef.current = [];
@@ -409,6 +416,32 @@ export default function RecursionCanvas({
       />
 
       <canvas ref={canvasRef} />
+
+      {previewUrl && (
+        <div className="preview-modal">
+          <div className="preview-content">
+            <span className="resolution">
+              Resolution: {canvasRef.current?.width} x{" "}
+              {canvasRef.current?.height}
+            </span>
+            <img src={previewUrl} alt="Preview" />
+
+            <div className="preview-actions">
+              <button onClick={() => setPreviewUrl(null)}>Continue edit</button>
+              <button
+                onClick={() => {
+                  const link = document.createElement("a");
+                  link.href = previewUrl;
+                  link.download = `recursion-${Date.now()}.png`;
+                  link.click();
+                }}
+              >
+                Download
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
