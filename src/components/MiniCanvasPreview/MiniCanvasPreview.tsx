@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import type { Config } from "../types";
-import { Branch } from "../core/Branch";
+import type { Config } from "../../types";
+import { Branch } from "../../core/Branch";
 
 const TWO_PI = Math.PI * 2;
 const HALF_PI = Math.PI / 2;

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import RandomnessDemo from "../components/RandomnessDemo";
-import MiniCanvasPreview from "../components/MiniCanvasPreview";
+import RandomnessDemo from "../../components/RandomnessDemo/RandomnessDemo";
 import { useNavigate } from "react-router-dom";
-import { PRESETS } from "../config/presets";
+import { PRESETS } from "../../config/presets";
+import MiniCanvasPreview from "../../components/MiniCanvasPreview/MiniCanvasPreview";
 
 const sections = [
   { id: "intro", label: "Introduction" },

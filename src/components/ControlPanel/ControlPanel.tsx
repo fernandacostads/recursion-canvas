@@ -1,13 +1,4 @@
-interface Props {
-  config: any;
-  setConfig: (c: any) => void;
-  presets: Record<string, any>;
-  onReset: () => void;
-  onPause: () => void;
-  onClear: () => void;
-  onSave: () => void;
-  onRegenerate: () => void;
-}
+import type { Props } from "./types";
 
 export default function ControlPanel({
   config,
@@ -43,7 +34,6 @@ export default function ControlPanel({
     <div className="panel">
       <h4>Recursion Controls</h4>
 
-      {/* Presets */}
       <label>Preset</label>
       <select onChange={(e) => setConfig({ ...presets[e.target.value] })}>
         {Object.keys(presets).map((p) => (
@@ -51,7 +41,6 @@ export default function ControlPanel({
         ))}
       </select>
 
-      {/* Render Mode */}
       <label>Render Mode</label>
       <select
         value={config.RENDER_MODE}
@@ -62,7 +51,6 @@ export default function ControlPanel({
         <option value="sketched">Sketched</option>
       </select>
 
-      {/* Sliders */}
       {sliders.map(([key, min, max, step]) => (
         <div key={key}>
           <label>
@@ -82,7 +70,6 @@ export default function ControlPanel({
         </div>
       ))}
 
-      {/* Buttons */}
       <div className="buttons">
         <button onClick={onReset}>🔄 Reset</button>
         <button onClick={onPause}>⏸ Pause</button>

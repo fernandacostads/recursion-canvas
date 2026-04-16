@@ -1,8 +1,4 @@
-interface Props {
-  fps: number;
-  branchCount: number;
-  onOpenDocs: () => void;
-}
+import type { Props } from "./types";
 
 export default function Header({ fps, branchCount, onOpenDocs }: Props) {
   return (

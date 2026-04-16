@@ -1,37 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import ControlPanel from "./ControlPanel";
-import { PRESETS } from "../config/presets";
-
-// =====================
-// TYPES
-// =====================
-
-type RenderMode = "darkness" | "segmented" | "sketched";
-
-interface Config {
-  RENDER_MODE: RenderMode;
-  BRANCH_PROBABILITY: number;
-  MAX_CONCURRENT: number;
-  NUM_BRANCHES: number;
-  MIN_RADIUS: number;
-  MAX_RADIUS: number;
-  MIN_WANDER_STEP: number;
-  MAX_WANDER_STEP: number;
-  MIN_GROWTH_RATE: number;
-  MAX_GROWTH_RATE: number;
-  MIN_SHRINK_RATE: number;
-  MAX_SHRINK_RATE: number;
-  MIN_DIVERGENCE: number;
-  MAX_DIVERGENCE: number;
-}
-
-// =====================
-// PRESETS
-// =====================
-
-// =====================
-// UTILS
-// =====================
+import ControlPanel from "../ControlPanel/ControlPanel";
+import { PRESETS } from "../../config/presets";
+import type { Config } from "./types";
 
 const random = (min: number, max: number) => min + Math.random() * (max - min);
 
