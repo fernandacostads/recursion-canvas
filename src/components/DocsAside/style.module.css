@@ -1,0 +1,94 @@
+/* ASIDE (lado direito) */
+.docs-aside {
+  width: 260px;
+  padding: 24px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  background: rgba(20, 20, 20, 0.95);
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+
+  overflow-y: auto;
+}
+
+/* CARDS */
+.aside-card {
+  padding: 14px;
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.aside-card h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* SLIDERS */
+.aside-card label {
+  font-size: 11px;
+  opacity: 0.7;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.aside-card input[type="range"] {
+  width: 100%;
+  accent-color: #6ee7ff;
+}
+
+/* MINI PREVIEW */
+.aside-mini {
+  height: 80px;
+  border-radius: 10px;
+
+  background: rgba(0, 0, 0, 0.4);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+/* TAGS */
+.aside-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.aside-tags span {
+  font-size: 10px;
+  padding: 4px 6px;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* LIST */
+.aside-card ul {
+  padding-left: 14px;
+  margin: 0;
+}
+
+.aside-card li {
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.aside-card p {
+  margin: 2px 0 0;
+  font-size: 11px;
+  opacity: 0.6;
+}
