@@ -347,66 +347,182 @@ export default function DocsContent() {
       {/* PERFORMANCE */}
       <section id="performance">
         <h2>Performance</h2>
-        <p>Performance depends heavily on how many branches are active.</p>
-        <ul>
-          <li>
-            Lower <b>MAX_CONCURRENT</b> for better FPS
-          </li>
-          <li>Reduce branching probability</li>
-          <li>
-            Use <b>Segmented</b> mode for lighter rendering
-          </li>
-          <li>Lower growth rate to slow updates</li>
-        </ul>
-      </section>
 
-      {/* IDEAS */}
-      <section id="ideas & explorations">
-        <h2>Ideas</h2>
-        <p>Try combining parameters to explore different behaviors:</p>
+        <p>
+          Performance is directly tied to how many branches are active and how
+          often they update and render. Since each branch performs calculations
+          and drawing operations every frame, the system can scale from very
+          lightweight to computationally intensive depending on configuration.
+        </p>
+
+        <h3>Key factors</h3>
         <ul>
           <li>
-            <b>Tree-like</b> → low branching + high growth
+            <b>MAX_CONCURRENT</b> — hard limit of active branches. This is the
+            most important parameter for performance.
           </li>
+          <li>
+            <b>BRANCH_PROBABILITY</b> — controls how quickly the system grows in
+            complexity.
+          </li>
+          <li>
+            <b>GROWTH_RATE</b> — affects how fast branches move and update
+            positions.
+          </li>
+          <li>
+            <b>SHRINK_RATE</b> — determines how long branches stay alive.
+          </li>
+        </ul>
+
+        <h3>Optimization strategies</h3>
+        <ul>
+          <li>
+            Lower <b>MAX_CONCURRENT</b> to cap total workload
+          </li>
+          <li>
+            Reduce <b>BRANCH_PROBABILITY</b> to slow down exponential growth
+          </li>
+          <li>
+            Use <b>segmented</b> render mode for lighter drawing operations
+          </li>
+          <li>
+            Increase <b>SHRINK_RATE</b> to remove branches faster
+          </li>
+          <li>
+            Lower <b>GROWTH_RATE</b> to reduce per-frame movement
+          </li>
+        </ul>
+
+        <h3>Trade-offs</h3>
+        <p>
+          Higher values produce richer and more complex visuals, but at the cost
+          of performance. Finding the right balance between visual density and
+          frame rate is key for a smooth experience.
+        </p>
+
+        <div className="doc-item">
+          <span className="tag">Optimization</span>
+          <span className="tag">Real-time</span>
+          <span className="tag">GPU/CPU bound</span>
+        </div>
+      </section>
+      {/* IDEAS */}
+      <section id="ideas">
+        <h2>Ideas & Exploration</h2>
+
+        <p>
+          The system is highly flexible and designed for exploration. By
+          combining different parameters, you can simulate a wide range of
+          natural and abstract behaviors.
+        </p>
+
+        <h3>Natural patterns</h3>
+        <ul>
+          <li>
+            <b>Tree-like</b> → low branching + upward growth + moderate
+            divergence
+          </li>
+          <li>
+            <b>Roots</b> → low divergence + slow growth + downward direction
+          </li>
+          <li>
+            <b>Frost</b> → no wander + high branching symmetry
+          </li>
+        </ul>
+
+        <h3>Chaotic systems</h3>
+        <ul>
           <li>
             <b>Chaos</b> → high wander + high probability
           </li>
           <li>
-            <b>Roots</b> → low divergence + slow growth
+            <b>Explosion</b> → high divergence + many initial branches
           </li>
           <li>
-            <b>Explosion</b> → high divergence + many branches
-          </li>
-          <li>
-            <b>Hairball</b> → high shrink + high branching
+            <b>Hairball</b> → high shrink resistance + extreme branching
           </li>
         </ul>
+
+        <h3>Artistic exploration</h3>
+        <ul>
+          <li>
+            <b>Calligraphy</b> → sketched mode + smooth wander
+          </li>
+          <li>
+            <b>Neural networks</b> → dense branching + low shrink
+          </li>
+          <li>
+            <b>Lightning</b> → sharp divergence + fast growth
+          </li>
+        </ul>
+
+        <p>
+          Small parameter changes can lead to dramatically different outcomes.
+          This sensitivity is what makes the system powerful for generative art.
+        </p>
+
+        <div className="doc-item">
+          <span className="tag">Creative Coding</span>
+          <span className="tag">Generative Art</span>
+          <span className="tag">Emergence</span>
+        </div>
       </section>
 
       {/* PRESETS */}
       <section id="presets">
         <h2>Presets</h2>
+
         <p>
-          Presets are curated configurations designed to produce visually
-          interesting patterns.
+          Presets are curated configurations that highlight specific behaviors
+          of the system. They serve as starting points for exploration and
+          demonstrate how parameter combinations affect the final result.
         </p>
+
+        <h3>Included presets</h3>
         <ul>
           <li>
-            <b>Vines</b> → flowing organic tendrils
+            <b>Vines</b> → flowing, organic tendrils with smooth curvature
           </li>
           <li>
-            <b>Fibrous</b> → dense thread-like structures
+            <b>Fibrous</b> → dense, thread-like structures with layered strokes
           </li>
           <li>
-            <b>Graffiti</b> → chaotic artistic strokes
+            <b>Graffiti</b> → expressive, chaotic lines with artistic randomness
           </li>
           <li>
-            <b>Frost</b> → crystalline branching
+            <b>Frost</b> → crystalline, symmetric branching patterns
           </li>
           <li>
-            <b>Hairball</b> → dense tangled mass
+            <b>Hairball</b> → compact, tangled mass with extreme density
+          </li>
+          <li>
+            <b>Beech Tree</b> → structured, tree-like growth with natural
+            balance
+          </li>
+          <li>
+            <b>Vegetable Root</b> → grounded, directional growth with minimal
+            spread
           </li>
         </ul>
+
+        <h3>Why use presets?</h3>
+        <ul>
+          <li>Quickly explore different visual styles</li>
+          <li>Understand parameter relationships</li>
+          <li>Use as a base for custom configurations</li>
+        </ul>
+
+        <p>
+          Each preset represents a different region of the parameter space.
+          Tweaking them in real-time allows you to discover entirely new
+          behaviors.
+        </p>
+
+        <div className="doc-item">
+          <span className="tag">Presets</span>
+          <span className="tag">Exploration</span>
+          <span className="tag">Parameter Space</span>
+        </div>
       </section>
     </main>
   );
