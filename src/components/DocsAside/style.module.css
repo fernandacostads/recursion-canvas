@@ -1,7 +1,7 @@
 /* ASIDE (lado direito) */
 .docs-aside {
-  width: 260px;
-  padding: 24px;
+  width: 360px;
+  padding: 34px;
 
   display: flex;
   flex-direction: column;
