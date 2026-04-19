@@ -35,7 +35,7 @@ export default function ControlPanel({
     <div className="panel">
       <div className="panel-header">
         <div>
-          <h3>🌿 Recursion</h3>
+          <h3>🌿 Recursion Canvas</h3>
           <span className="panel-subtitle">Controls</span>
         </div>
 

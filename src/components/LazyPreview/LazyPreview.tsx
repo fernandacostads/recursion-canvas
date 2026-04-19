@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import MiniCanvasPreview from "../MiniCanvasPreview/MiniCanvasPreview";
 import style from "./styles.module.css";

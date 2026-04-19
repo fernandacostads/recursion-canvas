@@ -1,14 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
-interface Section {
-  id: string;
-  label: string;
-}
-
-interface Props {
-  sections: Section[];
-  active: string;
-}
+import type { Props } from "./types";
 
 export default function DocsSidebar({ sections, active }: Props) {
   const navigate = useNavigate();
@@ -19,7 +10,6 @@ export default function DocsSidebar({ sections, active }: Props) {
 
   return (
     <aside className="docs-sidebar">
-      {/* HEADER */}
       <div className="header-left clickable" onClick={handleHomeClick}>
         <h1>🔁 Recursion</h1>
         <span className="subtitle">Canvas</span>
@@ -27,7 +17,6 @@ export default function DocsSidebar({ sections, active }: Props) {
 
       <h3>Documentation</h3>
 
-      {/* NAV */}
       <nav>
         {sections.map((s) => (
           <a
@@ -40,7 +29,6 @@ export default function DocsSidebar({ sections, active }: Props) {
         ))}
       </nav>
 
-      {/* BACK */}
       <button className="back-btn" onClick={() => navigate("/")}>
         ← Back
       </button>

@@ -19,33 +19,6 @@ body,
 html {
   scroll-behavior: smooth;
 }
-
-/* HEADER */
-.header {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-
-  padding: 14px 18px;
-  border-radius: 16px;
-
-  background: rgba(30, 30, 30, 0.6);
-  backdrop-filter: blur(12px);
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-
-  min-width: 240px;
-}
-
 /* LEFT */
 .header-left {
   display: flex;
@@ -177,6 +150,7 @@ html {
   transform: translateY(-1px);
   opacity: 0.9;
 }
+*/
 
 /* CANVAS */
 canvas {

@@ -8,10 +8,6 @@ const random = (min: number, max: number) => min + Math.random() * (max - min);
 const TWO_PI = Math.PI * 2;
 const HALF_PI = Math.PI / 2;
 
-// =====================
-// BRANCH (FIEL)
-// =====================
-
 class Branch {
   x: number;
   y: number;
@@ -231,9 +227,6 @@ class Branch {
   }
 }
 
-// =====================
-// COMPONENT
-// =====================
 interface Props {
   onFpsChange: (fps: number) => void;
   onBranchCountChange: (branchCount: number) => void;
@@ -337,6 +330,7 @@ export default function RecursionCanvas({
       canvas.removeEventListener("click", handleClick);
       window.removeEventListener("resize", resize);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function clearCanvas() {
@@ -348,7 +342,6 @@ export default function RecursionCanvas({
 
   return (
     <>
-      {/* BOTÃO FLUTUANTE */}
       {!isPanelOpen && (
         <button
           className="toggle-panel-btn"
@@ -358,7 +351,6 @@ export default function RecursionCanvas({
         </button>
       )}
 
-      {/* SIDEBAR */}
       <div className={`panel-wrapper ${isPanelOpen ? "open" : "closed"}`}>
         <ControlPanel
           config={config}
