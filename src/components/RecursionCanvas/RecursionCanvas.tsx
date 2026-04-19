@@ -250,6 +250,7 @@ export default function RecursionCanvas({
 
   const [config, setConfig] = useState(PRESETS["Vines"]);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isPanelOpen, setIsPanelOpen] = useState(true);
 
   useEffect(() => {
     configRef.current = config;
@@ -347,43 +348,52 @@ export default function RecursionCanvas({
 
   return (
     <>
-      <ControlPanel
-        config={config}
-        setConfig={setConfig}
-        presets={PRESETS}
-        onReset={() => setConfig(PRESETS["Vines"])}
-        onPause={() => (branchesRef.current = [])}
-        onClear={() => {
-          branchesRef.current.length = 0;
-          clearCanvas();
-        }}
-        // onSave={() => {
-        //   const url = canvasRef.current!.toDataURL("image/png");
-        //   window.open(url);
-        // }}
-        onSave={() => {
-          const canvas = canvasRef.current!;
-          const url = canvas.toDataURL("image/png");
+      {/* BOTÃO FLUTUANTE */}
+      {!isPanelOpen && (
+        <button
+          className="toggle-panel-btn"
+          onClick={() => setIsPanelOpen(true)}
+        >
+          ⚙️
+        </button>
+      )}
 
-          setPreviewUrl(url);
-        }}
-        onRegenerate={() => {
-          branchesRef.current = [];
-          const canvas = canvasRef.current!;
-          const x = canvas.width / 2;
-          const y = canvas.height / 2;
+      {/* SIDEBAR */}
+      <div className={`panel-wrapper ${isPanelOpen ? "open" : "closed"}`}>
+        <ControlPanel
+          config={config}
+          setConfig={setConfig}
+          presets={PRESETS}
+          onReset={() => setConfig(PRESETS["Vines"])}
+          onPause={() => (branchesRef.current = [])}
+          onClear={() => {
+            branchesRef.current.length = 0;
+            clearCanvas();
+          }}
+          onSave={() => {
+            const canvas = canvasRef.current!;
+            const url = canvas.toDataURL("image/png");
+            setPreviewUrl(url);
+          }}
+          onRegenerate={() => {
+            branchesRef.current = [];
+            const canvas = canvasRef.current!;
+            const x = canvas.width / 2;
+            const y = canvas.height / 2;
 
-          const cfg = configRef.current;
+            const cfg = configRef.current;
 
-          for (let i = 0; i < cfg.NUM_BRANCHES; i++) {
-            const theta = (i / cfg.NUM_BRANCHES) * TWO_PI;
+            for (let i = 0; i < cfg.NUM_BRANCHES; i++) {
+              const theta = (i / cfg.NUM_BRANCHES) * TWO_PI;
 
-            branchesRef.current.push(
-              new Branch(x, y, theta - HALF_PI, cfg.MAX_RADIUS, cfg),
-            );
-          }
-        }}
-      />
+              branchesRef.current.push(
+                new Branch(x, y, theta - HALF_PI, cfg.MAX_RADIUS, cfg),
+              );
+            }
+          }}
+          onClose={() => setIsPanelOpen(false)}
+        />
+      </div>
 
       <canvas ref={canvasRef} />
 
@@ -394,10 +404,12 @@ export default function RecursionCanvas({
               Resolution: {canvasRef.current?.width} x{" "}
               {canvasRef.current?.height}
             </span>
+
             <img src={previewUrl} alt="Preview" />
 
             <div className="preview-actions">
               <button onClick={() => setPreviewUrl(null)}>Continue edit</button>
+
               <button
                 onClick={() => {
                   const link = document.createElement("a");

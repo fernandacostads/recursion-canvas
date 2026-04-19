@@ -9,6 +9,7 @@ export default function ControlPanel({
   onClear,
   onSave,
   onRegenerate,
+  onClose,
 }: Props) {
   const update = (key: string, value: number | string) => {
     setConfig({ ...config, [key]: value });
@@ -32,50 +33,67 @@ export default function ControlPanel({
 
   return (
     <div className="panel">
-      <h4>Recursion Controls</h4>
-
-      <label>Preset</label>
-      <select onChange={(e) => setConfig({ ...presets[e.target.value] })}>
-        {Object.keys(presets).map((p) => (
-          <option key={p}>{p}</option>
-        ))}
-      </select>
-
-      <label>Render Mode</label>
-      <select
-        value={config.RENDER_MODE}
-        onChange={(e) => update("RENDER_MODE", e.target.value)}
-      >
-        <option value="darkness">Darkness</option>
-        <option value="segmented">Segmented</option>
-        <option value="sketched">Sketched</option>
-      </select>
-
-      {sliders.map(([key, min, max, step]) => (
-        <div key={key}>
-          <label>
-            {key}:{" "}
-            {typeof config[key] === "number"
-              ? config[key].toFixed(3)
-              : config[key]}
-          </label>
-          <input
-            type="range"
-            min={min}
-            max={max}
-            step={step}
-            value={config[key]}
-            onChange={(e) => update(key, +e.target.value)}
-          />
+      <div className="panel-header">
+        <div>
+          <h3>🌿 Recursion</h3>
+          <span className="panel-subtitle">Controls</span>
         </div>
-      ))}
 
-      <div className="buttons">
-        <button onClick={onReset}>🔄 Reset</button>
-        <button onClick={onPause}>⏸ Pause</button>
-        <button onClick={onClear}>🧹 Clear</button>
-        <button onClick={onRegenerate}>🆕 New</button>
-        <button onClick={onSave}>💾 Save</button>
+        <button className="close-btn" onClick={onClose}>
+          ✕
+        </button>
+      </div>
+      <div className="panel-section">
+        <label>Preset</label>
+        <select onChange={(e) => setConfig({ ...presets[e.target.value] })}>
+          {Object.keys(presets).map((p) => (
+            <option key={p}>{p}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="panel-section">
+        <label>Render Mode</label>
+        <select
+          value={config.RENDER_MODE}
+          onChange={(e) => update("RENDER_MODE", e.target.value)}
+        >
+          <option value="darkness">Darkness</option>
+          <option value="segmented">Segmented</option>
+          <option value="sketched">Sketched</option>
+        </select>
+      </div>
+
+      <div className="panel-sliders">
+        {sliders.map(([key, min, max, step]) => (
+          <div className="slider-group" key={key}>
+            <div className="slider-label">
+              <span>{key}</span>
+              <strong>
+                {typeof config[key] === "number"
+                  ? config[key].toFixed(2)
+                  : config[key]}
+              </strong>
+            </div>
+
+            <input
+              type="range"
+              min={min}
+              max={max}
+              step={step}
+              value={config[key]}
+              onChange={(e) => update(key, +e.target.value)}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="panel-buttons">
+        <button onClick={onReset}>Reset</button>
+        <button onClick={onPause}>Pause</button>
+        <button onClick={onClear}>Clear</button>
+        <button onClick={onRegenerate}>New</button>
+        <button onClick={onSave}>Save</button>
       </div>
     </div>
   );

@@ -7,4 +7,5 @@ export interface Props {
   onClear: () => void;
   onSave: () => void;
   onRegenerate: () => void;
+  onClose: () => void;
 }
