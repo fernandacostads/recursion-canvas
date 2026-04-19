@@ -47,16 +47,13 @@ export class Branch {
   ) {
     this.x = this.ox = x;
     this.y = this.oy = y;
-
     this.theta = theta;
     this.radius = radius;
     this.scale = scale;
     this.generation = generation;
 
     this.wanderStep = random(config.MIN_WANDER_STEP, config.MAX_WANDER_STEP);
-
     this.growthRate = random(config.MIN_GROWTH_RATE, config.MAX_GROWTH_RATE);
-
     this.shrinkRate = random(config.MIN_SHRINK_RATE, config.MAX_SHRINK_RATE);
   }
 
@@ -66,16 +63,13 @@ export class Branch {
     this.ox = this.x;
     this.oy = this.y;
 
-    // movimento
     this.theta += random(-this.wanderStep, this.wanderStep);
 
     this.x += Math.cos(this.theta) * this.growthRate * this.scale;
     this.y += Math.sin(this.theta) * this.growthRate * this.scale;
 
-    // shrink
     this.scale *= this.shrinkRate;
 
-    // branching
     if (
       branches.length < config.MAX_CONCURRENT &&
       Math.random() < config.BRANCH_PROBABILITY
@@ -100,7 +94,6 @@ export class Branch {
       );
     }
 
-    // morte
     if (this.radius * this.scale <= config.MIN_RADIUS) {
       this.growing = false;
     }
@@ -149,7 +142,6 @@ export class Branch {
 
         x1 = this.x + Math.cos(this.theta - HALF_PI) * radius;
         x2 = this.x + Math.cos(this.theta + HALF_PI) * radius;
-
         y1 = this.y + Math.sin(this.theta - HALF_PI) * radius;
         y2 = this.y + Math.sin(this.theta + HALF_PI) * radius;
 
@@ -192,7 +184,6 @@ export class Branch {
 
         x1 = this.x + Math.cos(this.theta - HALF_PI) * radius;
         x2 = this.x + Math.cos(this.theta + HALF_PI) * radius;
-
         y1 = this.y + Math.sin(this.theta - HALF_PI) * radius;
         y2 = this.y + Math.sin(this.theta + HALF_PI) * radius;
 

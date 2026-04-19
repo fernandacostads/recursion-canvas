@@ -1,11 +1,13 @@
 /* ASIDE (lado direito) */
 .docs-aside {
-  width: 360px;
-  padding: 34px;
+  width: 340px;
+  padding: 0 14px;
 
   display: flex;
+  align-items: center;
+  /* justify-content: center; */
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 
   background: rgba(20, 20, 20, 0.95);
   border-left: 1px solid rgba(255, 255, 255, 0.06);
@@ -15,7 +17,7 @@
 
 /* CARDS */
 .aside-card {
-  padding: 14px;
+  padding: 24px;
   border-radius: 14px;
 
   background: rgba(255, 255, 255, 0.04);
@@ -169,4 +171,48 @@
 
 .preset-list button:nth-child(3):hover {
   background: linear-gradient(135deg, #60a5fa, #38bdf8);
+}
+
+.previewCanvas {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tags span {
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.aside-tags button {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.05);
+  color: #aaa;
+
+  transition: 0.2s;
+}
+
+.aside-tags button:hover {
+  color: #fff;
+}
+
+.aside-tags button.active {
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  color: #fff;
 }

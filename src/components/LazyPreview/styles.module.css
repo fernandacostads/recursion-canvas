@@ -1,0 +1,35 @@
+.placeholder {
+  height: 160px;
+  border-radius: 10px;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #aaa;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.placeholder:hover {
+  background: #1a1a1a;
+  color: #fff;
+  cursor: pointer;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.replay {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 4px 8px;
+  cursor: pointer;
+}

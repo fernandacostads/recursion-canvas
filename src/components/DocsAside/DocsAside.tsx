@@ -102,11 +102,26 @@
 
 import { useState } from "react";
 import style from "./style.module.css";
+import { PRESETS } from "../../config/presets";
+import MiniCanvasPreview from "../MiniCanvasPreview/MiniCanvasPreview";
 
 export default function DocsAside() {
   const [wander, setWander] = useState(0.2);
   const [growth, setGrowth] = useState(10);
   const [branch, setBranch] = useState(0.1);
+  const [renderMode, setRenderMode] = useState<
+    "darkness" | "segmented" | "sketched"
+  >("sketched");
+
+  const liveConfig = {
+    ...PRESETS.Frost,
+    RENDER_MODE: renderMode,
+    MIN_WANDER_STEP: wander * 0.5,
+    MAX_WANDER_STEP: wander,
+    MIN_GROWTH_RATE: growth * 0.5,
+    MAX_GROWTH_RATE: growth,
+    BRANCH_PROBABILITY: branch,
+  };
 
   return (
     <aside className={style["docs-aside"]}>
@@ -173,8 +188,41 @@ export default function DocsAside() {
         </label>
 
         <div className={style.preview}>
-          <span>Live preview coming soon</span>
+          <MiniCanvasPreview config={liveConfig} />
         </div>
+      </div>
+
+      {/* RENDER MODES */}
+      <div className={style["aside-card"]}>
+        <h4>Render Modes</h4>
+
+        <div className={style["aside-tags"]}>
+          <button
+            className={renderMode === "darkness" ? style.active : ""}
+            onClick={() => setRenderMode("darkness")}
+          >
+            darkness
+          </button>
+
+          <button
+            className={renderMode === "segmented" ? style.active : ""}
+            onClick={() => setRenderMode("segmented")}
+          >
+            segmented
+          </button>
+
+          <button
+            className={renderMode === "sketched" ? style.active : ""}
+            onClick={() => setRenderMode("sketched")}
+          >
+            sketched
+          </button>
+        </div>
+
+        <p className={style.desc}>
+          Each mode changes how geometry is drawn, affecting depth, texture and
+          visual weight.
+        </p>
       </div>
 
       {/* QUICK PRESETS */}
@@ -212,22 +260,6 @@ export default function DocsAside() {
             ❄ Frost
           </button>
         </div>
-      </div>
-
-      {/* RENDER MODES */}
-      <div className={style["aside-card"]}>
-        <h4>Render Modes</h4>
-
-        <div className={style["aside-tags"]}>
-          <span>darkness</span>
-          <span>segmented</span>
-          <span>sketched</span>
-        </div>
-
-        <p className={style.desc}>
-          Each mode changes how geometry is drawn, affecting depth, texture and
-          visual weight.
-        </p>
       </div>
 
       {/* ENGINE INSIGHTS */}

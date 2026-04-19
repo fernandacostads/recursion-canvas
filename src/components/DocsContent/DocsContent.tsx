@@ -1,5 +1,5 @@
 import { PRESETS } from "../../config/presets";
-import MiniCanvasPreview from "../MiniCanvasPreview/MiniCanvasPreview";
+import LazyPreview from "../LazyPreview/LazyPreview";
 import RandomnessDemo from "../RandomnessDemo/RandomnessDemo";
 
 export default function DocsContent() {
@@ -20,7 +20,6 @@ export default function DocsContent() {
           transforming branches.
         </p>
       </section>
-
       {/* HOW */}
       <section id="how">
         <h2>How it works</h2>
@@ -55,7 +54,6 @@ export default function DocsContent() {
           <li>Die: Branch is removed</li>
         </ol>
       </section>
-
       {/* MATH */}
       <section id="math">
         <h2>Mathematical Model</h2>
@@ -141,7 +139,6 @@ export default function DocsContent() {
           what creates the illusion of life-like growth.
         </p>
       </section>
-
       {/* RENDER */}
       <section id="render">
         <h2>Render Modes</h2>
@@ -149,15 +146,13 @@ export default function DocsContent() {
           The rendering mode defines how branches are visually represented on
           the canvas.
         </p>
-        <div className="docs-grid">
+        <div className="docs-flex">
           <div className="doc-item">
             <h3>darkness</h3>
-            <p>Organic filled shapes. Visualiy represented with dark color.</p>
-            <div className="preview">
-              <MiniCanvasPreview
-                config={{ ...PRESETS.Hairball, RENDER_MODE: "darkness" }}
-              />
-            </div>
+            <p>Organic filled shapes with dark color.</p>
+            <LazyPreview
+              config={{ ...PRESETS.Hairball, RENDER_MODE: "darkness" }}
+            />
             <div
               style={{
                 display: "inline-flex",
@@ -173,11 +168,9 @@ export default function DocsContent() {
           <div className="doc-item">
             <h3>segmented</h3>
             <p>Layered strokes that resemble tubes or fibers.</p>
-            <div className="preview">
-              <MiniCanvasPreview
-                config={{ ...PRESETS.Fibrous, RENDER_MODE: "segmented" }}
-              />
-            </div>
+            <LazyPreview
+              config={{ ...PRESETS.Frost, RENDER_MODE: "segmented" }}
+            />
             <div
               style={{
                 display: "inline-flex",
@@ -195,11 +188,9 @@ export default function DocsContent() {
           <div className="doc-item">
             <h3>sketched</h3>
             <p>Hand-drawn represented with a sketchy appearance.</p>
-            <div className="preview">
-              <MiniCanvasPreview
-                config={{ ...PRESETS.Graffiti, RENDER_MODE: "sketched" }}
-              />
-            </div>
+            <LazyPreview
+              config={{ ...PRESETS.Graffiti, RENDER_MODE: "sketched" }}
+            />
             <div
               style={{
                 display: "inline-flex",
@@ -213,7 +204,6 @@ export default function DocsContent() {
           </div>
         </div>
       </section>
-
       <section id="lifecycle">
         <h2>Lifecycle</h2>
         <p>Every branch follows a lifecycle from creation to disappearance.</p>
@@ -246,41 +236,113 @@ export default function DocsContent() {
       {/* RANDOMNESS */}
       <section id="randomness">
         <h2>Randomness & Determinism</h2>
+
         <p>
-          The system combines deterministic rules with controlled randomness.
+          The system operates at the intersection of <b>deterministic rules</b>{" "}
+          and <b>controlled randomness</b>. This balance is what allows simple
+          equations to generate complex, organic structures.
         </p>
-        <ul>
-          <li>Deterministic math (cos/sin)</li>
-          <li>Random wander</li>
-          <li>Probabilistic branching</li>
-        </ul>
-        <h3>Deterministic</h3>
-        <ul>
-          <li>Movement uses trigonometry</li>
-          <li>Growth and shrink follow fixed rates</li>
-          <li>Each frame updates predictably</li>
-        </ul>
-        <h3>Randomness</h3>
-        <ul>
-          <li>Wander introduces directional variation</li>
-          <li>Branching is probabilistic</li>
-          <li>Parameters vary per branch</li>
-        </ul>
-        <p>
-          <h3>Probabilistic Branching</h3>
-          <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-          This balance ensures results are never identical, yet always coherent.
-        </p>
+
         <div className="doc-item">
+          <span className="tag">Deterministic</span>
           <span className="tag">Stochastic</span>
           <span className="tag">Emergence</span>
         </div>
-      </section>
 
+        <h3>Deterministic foundation</h3>
+        <p>
+          At its core, every branch follows predictable mathematical rules.
+          These ensure stability and coherence across the system.
+        </p>
+
+        <ul>
+          <li>
+            <b>Trigonometric movement</b> — position evolves using cosine and
+            sine
+          </li>
+          <li>
+            <b>Consistent growth</b> — branches expand at a defined rate
+          </li>
+          <li>
+            <b>Gradual decay</b> — scale reduces over time (shrink factor)
+          </li>
+        </ul>
+
+        <p>
+          Without randomness, the system would produce rigid, repetitive and
+          artificial patterns.
+        </p>
+
+        <h3>Controlled randomness</h3>
+        <p>
+          To break uniformity, randomness is introduced at key points — not as
+          noise, but as a structured source of variation.
+        </p>
+
+        <ul>
+          <li>
+            <b>Wander</b> — small directional changes create fluid, organic
+            motion
+          </li>
+          <li>
+            <b>Parameter variation</b> — each branch has slightly different
+            properties
+          </li>
+          <li>
+            <b>Probabilistic branching</b> — growth is driven by chance, not
+            certainty
+          </li>
+        </ul>
+
+        <h3>Probabilistic Branching</h3>
+
+        <p>
+          Instead of always splitting, each branch has a <b>chance</b> to
+          generate a new one at every frame. This introduces stochastic behavior
+          while preserving overall structure.
+        </p>
+
+        <ul>
+          <li>A random value between 0 and 1 is generated</li>
+          <li>
+            It is compared against <b>BRANCH_PROBABILITY</b>
+          </li>
+          <li>
+            If the condition is met, a new branch is spawned with angular
+            divergence
+          </li>
+        </ul>
+
+        <p>
+          This simple rule leads to <b>exponential growth</b>, but in a
+          non-uniform way. Some regions become dense, while others remain sparse
+          — mimicking natural systems like trees, veins and lightning.
+        </p>
+
+        <h3>Emergent behavior</h3>
+
+        <p>
+          Individually, each rule is trivial. Together, they create structures
+          that appear complex and alive. This phenomenon is known as{" "}
+          <b>emergence</b> — where complexity arises from the interaction of
+          simple components.
+        </p>
+
+        <p>The result is a system that is:</p>
+
+        <ul>
+          <li>Never exactly the same twice</li>
+          <li>Visually coherent</li>
+          <li>Rich in variation</li>
+          <li>Capable of simulating natural growth</li>
+        </ul>
+
+        <div className="doc-item">
+          <span className="tag">Procedural</span>
+          <span className="tag">Organic Systems</span>
+          <span className="tag">Generative Art</span>
+        </div>
+      </section>
       <section id="params">
         <h2>Parameters</h2>
         <p>
@@ -350,63 +412,130 @@ export default function DocsContent() {
 
         <p>
           Performance is directly tied to how many branches are active and how
-          often they update and render. Since each branch performs calculations
-          and drawing operations every frame, the system can scale from very
-          lightweight to computationally intensive depending on configuration.
+          often they are updated and rendered. Since each branch executes logic
+          every frame, the system behaves like a real-time simulation with
+          dynamic complexity.
         </p>
 
-        <h3>Key factors</h3>
+        <h3>Algorithmic perspective</h3>
+
+        <p>The core loop iterates over all active branches every frame:</p>
+
+        <pre>for each branch: update() render()</pre>
+
+        <p>
+          This results in a time complexity of <b>O(n)</b> per frame, where{" "}
+          <b>n</b> is the number of active branches.
+        </p>
+
+        <p>
+          However, due to <b>probabilistic branching</b>, the system can
+          approach <b>exponential growth</b> over time if left unchecked:
+        </p>
+
+        <pre>n → n + (n * BRANCH_PROBABILITY)</pre>
+
+        <p>Without constraints, this leads to rapid performance degradation.</p>
+
+        <h3>Space complexity</h3>
+
+        <p>
+          All active branches are stored in a linear structure (array),
+          resulting in
+          <b>O(n)</b> space complexity.
+        </p>
+
+        <ul>
+          <li>Each branch stores position, direction, scale and state</li>
+          <li>Memory usage grows linearly with active branches</li>
+          <li>Frequent allocation occurs when new branches are created</li>
+        </ul>
+
+        <p>
+          The <b>MAX_CONCURRENT</b> parameter acts as a hard cap, preventing
+          unbounded memory growth.
+        </p>
+
+        <h3>Key performance factors</h3>
+
         <ul>
           <li>
-            <b>MAX_CONCURRENT</b> — hard limit of active branches. This is the
-            most important parameter for performance.
+            <b>MAX_CONCURRENT</b> — limits total active nodes (primary
+            bottleneck)
           </li>
           <li>
-            <b>BRANCH_PROBABILITY</b> — controls how quickly the system grows in
-            complexity.
+            <b>BRANCH_PROBABILITY</b> — controls exponential growth rate
           </li>
           <li>
-            <b>GROWTH_RATE</b> — affects how fast branches move and update
-            positions.
+            <b>RENDER_MODE</b> — affects drawing cost (fill vs stroke vs shadow)
           </li>
           <li>
-            <b>SHRINK_RATE</b> — determines how long branches stay alive.
+            <b>SHRINK_RATE</b> — defines lifecycle duration of branches
           </li>
         </ul>
 
-        <h3>Optimization strategies</h3>
+        <h3>Rendering cost (CPU vs GPU)</h3>
+
         <ul>
           <li>
-            Lower <b>MAX_CONCURRENT</b> to cap total workload
+            <b>Segmented</b> → lighter (simple strokes, minimal fill)
           </li>
           <li>
-            Reduce <b>BRANCH_PROBABILITY</b> to slow down exponential growth
+            <b>Sketched</b> → moderate (more geometry calculations)
           </li>
           <li>
-            Use <b>segmented</b> render mode for lighter drawing operations
+            <b>Darkness</b> → heavier (fills + shadows + overdraw)
+          </li>
+        </ul>
+
+        <p>
+          Rendering cost is cumulative — each branch adds draw calls per frame,
+          increasing pressure on both CPU and GPU.
+        </p>
+
+        <h3>Optimization strategies</h3>
+
+        <ul>
+          <li>
+            Lower <b>MAX_CONCURRENT</b> to cap overall complexity
           </li>
           <li>
-            Increase <b>SHRINK_RATE</b> to remove branches faster
+            Reduce <b>BRANCH_PROBABILITY</b> to slow exponential growth
           </li>
           <li>
-            Lower <b>GROWTH_RATE</b> to reduce per-frame movement
+            Increase <b>SHRINK_RATE</b> to shorten branch lifespan
           </li>
+          <li>
+            Prefer <b>segmented</b> mode for better performance
+          </li>
+          <li>Avoid unnecessary re-renders (pause when off-screen)</li>
         </ul>
 
         <h3>Trade-offs</h3>
+
         <p>
-          Higher values produce richer and more complex visuals, but at the cost
-          of performance. Finding the right balance between visual density and
-          frame rate is key for a smooth experience.
+          The system exists in a balance between <b>visual richness</b> and{" "}
+          <b>computational cost</b>.
+        </p>
+
+        <ul>
+          <li>High density → more organic and complex visuals</li>
+          <li>Low density → better performance and stability</li>
+        </ul>
+
+        <p>
+          Finding the optimal configuration is a matter of tuning parameters to
+          stay within real-time constraints (~60 FPS).
         </p>
 
         <div className="doc-item">
-          <span className="tag">Optimization</span>
-          <span className="tag">Real-time</span>
-          <span className="tag">GPU/CPU bound</span>
+          <span className="tag">O(n)</span>
+          <span className="tag">Real-time Simulation</span>
+          <span className="tag">CPU/GPU Bound</span>
+          <span className="tag">Exponential Growth</span>
         </div>
       </section>
-      {/* IDEAS */}
+
       <section id="ideas">
         <h2>Ideas & Exploration</h2>
 
@@ -467,7 +596,6 @@ export default function DocsContent() {
           <span className="tag">Emergence</span>
         </div>
       </section>
-
       {/* PRESETS */}
       <section id="presets">
         <h2>Presets</h2>

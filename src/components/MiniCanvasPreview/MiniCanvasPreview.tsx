@@ -1,101 +1,475 @@
+// import { useEffect, useRef } from "react";
+// import { Branch } from "../../core/Branch";
+// import { PRESETS } from "../../config/presets";
+
+// export default function MiniCanvasPreview() {
+//   const canvasRef = useRef<HTMLCanvasElement>(null);
+//   const branchesRef = useRef<Branch[]>([]);
+//   const animationRef = useRef<number | null>(null);
+
+//   useEffect(() => {
+//     const canvas = canvasRef.current!;
+//     const ctx = canvas.getContext("2d")!;
+//     const config = PRESETS["Vines"]; // 🔥 mesma config
+
+//     const scale = window.devicePixelRatio || 1;
+
+//     const size = 220;
+
+//     canvas.width = size * scale;
+//     canvas.height = size * scale;
+
+//     canvas.style.width = size + "px";
+//     canvas.style.height = size + "px";
+
+//     ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+//     // spawn igual ao principal
+//     const spawn = () => {
+//       branchesRef.current = [];
+
+//       const x = size / 2;
+//       const y = size / 2;
+
+//       for (let i = 0; i < config.NUM_BRANCHES; i++) {
+//         const theta = (i / config.NUM_BRANCHES) * Math.PI * 2;
+
+//         branchesRef.current.push(
+//           new Branch(x, y, theta - Math.PI / 2, config.MAX_RADIUS, config),
+//         );
+//       }
+//     };
+
+//     spawn();
+
+//     const loop = () => {
+//       animationRef.current = requestAnimationFrame(loop);
+
+//       const branches = branchesRef.current;
+
+//       branches.forEach((b) => {
+//         b.update(branches, config);
+//         b.render(ctx, config);
+//       });
+
+//       // 🔥 importante: NÃO limpar o canvas
+//       branchesRef.current = branches.filter((b) => b.growing);
+
+//       // respawn automático pra manter vivo
+//       if (branchesRef.current.length === 0) {
+//         spawn();
+//       }
+//     };
+
+//     loop();
+
+//     return () => {
+//       cancelAnimationFrame(animationRef.current!);
+//     };
+//   }, []);
+
+//   return <canvas ref={canvasRef} />;
+// }
+
+// FPG CAI
+// import { useEffect, useRef } from "react";
+// import { Branch } from "../../core/Branch";
+// import type { Config } from "../../types";
+
+// const TWO_PI = Math.PI * 2;
+// const HALF_PI = Math.PI / 2;
+
+// interface Props {
+//   config: Config;
+// }
+
+// export default function MiniCanvasPreview({ config }: Props) {
+//   const canvasRef = useRef<HTMLCanvasElement>(null);
+//   const branchesRef = useRef<Branch[]>([]);
+
+//   useEffect(() => {
+//     const canvas = canvasRef.current!;
+//     const ctx = canvas.getContext("2d")!;
+
+//     // 🔥 DPI FIX (igual ao principal)
+//     const scale = window.devicePixelRatio || 1;
+
+//     const width = 220;
+//     const height = 220;
+
+//     canvas.width = width * scale;
+//     canvas.height = height * scale;
+
+//     canvas.style.width = width + "px";
+//     canvas.style.height = height + "px";
+
+//     ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+//     // 🔥 spawn radial igual ao original
+//     const spawn = () => {
+//       branchesRef.current = [];
+
+//       for (let i = 0; i < config.NUM_BRANCHES; i++) {
+//         const theta = (i / config.NUM_BRANCHES) * TWO_PI;
+
+//         branchesRef.current.push(
+//           new Branch(
+//             width / 2,
+//             height / 2,
+//             theta - HALF_PI,
+//             config.MAX_RADIUS,
+//             config,
+//           ),
+//         );
+//       }
+//     };
+
+//     spawn();
+
+//     let animationId: number;
+
+//     const loop = () => {
+//       animationId = requestAnimationFrame(loop);
+
+//       const ctx = canvas.getContext("2d")!;
+
+//       // 🔥 leve fade (igual sensação do principal)
+//       ctx.fillStyle = "rgba(0,0,0,0.05)";
+//       ctx.fillRect(0, 0, width, height);
+
+//       branchesRef.current.forEach((b) => {
+//         b.update(branchesRef.current, config);
+//         b.render(ctx, config);
+//       });
+
+//       // 🔥 ESSENCIAL
+//       branchesRef.current = branchesRef.current.filter((b) => b.growing);
+//     };
+
+//     loop();
+
+//     return () => cancelAnimationFrame(animationId);
+//   }, [config]);
+
+//   return <canvas ref={canvasRef} />;
+// }
+
+//the last
+// import { useEffect, useRef } from "react";
+// import { Branch } from "../../core/Branch";
+// import type { Config } from "../../types";
+
+// const TWO_PI = Math.PI * 2;
+// const HALF_PI = Math.PI / 2;
+
+// interface Props {
+//   config: Config;
+//   resetSignal?: number;
+// }
+
+// export default function MiniCanvasPreview({ config, resetSignal }: Props) {
+//   const canvasRef = useRef<HTMLCanvasElement>(null);
+//   const branchesRef = useRef<Branch[]>([]);
+//   const animationRef = useRef<number | null>(null);
+
+//   useEffect(() => {
+//     const canvas = canvasRef.current!;
+//     const ctx = canvas.getContext("2d")!;
+
+//     // 🔥 DPI FIX (igual ao principal)
+//     const scale = window.devicePixelRatio || 1;
+
+//     const width = 250;
+//     const height = 200;
+
+//     canvas.width = width * scale;
+//     canvas.height = height * scale;
+
+//     canvas.style.width = width + "px";
+//     canvas.style.height = height + "px";
+
+//     ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+//     const spawn = () => {
+//       branchesRef.current = [];
+
+//       for (let i = 0; i < config.NUM_BRANCHES; i++) {
+//         const theta = (i / config.NUM_BRANCHES) * TWO_PI;
+
+//         branchesRef.current.push(
+//           new Branch(
+//             width / 2,
+//             height / 2,
+//             theta - HALF_PI,
+//             config.MAX_RADIUS,
+//             config,
+//           ),
+//         );
+//       }
+//     };
+
+//     spawn();
+
+//     let animationId: number;
+
+//     const loop = () => {
+//       animationId = requestAnimationFrame(loop);
+
+//       const ctx = canvas.getContext("2d")!;
+
+//       // 🔥 leve fade (igual sensação do principal)
+//       ctx.fillStyle = "rgba(0,0,0,0.05)";
+//       ctx.fillRect(0, 0, width, height);
+
+//       branchesRef.current.forEach((b) => {
+//         b.update(branchesRef.current, config);
+//         b.render(ctx, config);
+//       });
+
+//       // 🔥 ESSENCIAL
+//       branchesRef.current = branchesRef.current.filter((b) => b.growing);
+//     };
+
+//     loop();
+
+//     return () => cancelAnimationFrame(animationId);
+//   }, [config, resetSignal]); // 🔥 resetSignal no array de dependências
+
+//   return <canvas ref={canvasRef} />;
+// }
+
+// Ante do intersetion observer
+// import { useEffect, useRef } from "react";
+// import { Branch } from "../../core/Branch";
+// import type { Config } from "../../types";
+
+// const TWO_PI = Math.PI * 2;
+// const HALF_PI = Math.PI / 2;
+
+// interface Props {
+//   config: Config;
+//   resetSignal?: number;
+// }
+
+// export default function MiniCanvasPreview({ config, resetSignal }: Props) {
+//   const canvasRef = useRef<HTMLCanvasElement>(null);
+//   const branchesRef = useRef<Branch[]>([]);
+//   const animationRef = useRef<number | null>(null);
+
+//   useEffect(() => {
+//     const canvas = canvasRef.current!;
+//     const ctx = canvas.getContext("2d")!;
+
+//     const scale = window.devicePixelRatio || 1;
+
+//     const width = 250;
+//     const height = 200;
+
+//     canvas.width = width * scale;
+//     canvas.height = height * scale;
+
+//     canvas.style.width = width + "px";
+//     canvas.style.height = height + "px";
+
+//     ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+//     // 🔥 spawn igual ao principal
+//     const spawn = () => {
+//       branchesRef.current = [];
+
+//       for (let i = 0; i < config.NUM_BRANCHES; i++) {
+//         const theta = (i / config.NUM_BRANCHES) * TWO_PI;
+
+//         branchesRef.current.push(
+//           new Branch(
+//             width / 2,
+//             height / 2,
+//             theta - HALF_PI,
+//             config.MAX_RADIUS,
+//             config,
+//           ),
+//         );
+//       }
+//     };
+
+//     spawn();
+
+//     let animationId: number | null = null;
+
+//     const loop = () => {
+//       animationId = requestAnimationFrame(loop);
+
+//       // 🔥 fade leve (efeito bonito igual principal)
+//       ctx.fillStyle = "rgba(0,0,0,0.05)";
+//       ctx.fillRect(0, 0, width, height);
+
+//       const branches = branchesRef.current;
+
+//       for (let i = 0; i < branches.length; i++) {
+//         const b = branches[i];
+//         b.update(branches, config);
+//         b.render(ctx, config);
+//       }
+
+//       branchesRef.current = branches.filter((b) => b.growing);
+
+//       // 🔥 respawn automático (mantém vivo)
+//       if (branchesRef.current.length === 0) {
+//         spawn();
+//       }
+//     };
+
+//     loop();
+//     animationRef.current = animationId;
+
+//     return () => {
+//       if (animationId !== null) {
+//         cancelAnimationFrame(animationId);
+//       }
+//     };
+//   }, [config, resetSignal]); // 🔥 ESSENCIAL
+
+//   return <canvas ref={canvasRef} />;
+// }
+
 import { useEffect, useRef } from "react";
-import type { Config } from "../../types";
 import { Branch } from "../../core/Branch";
+import type { Config } from "../../types";
 
 const TWO_PI = Math.PI * 2;
 const HALF_PI = Math.PI / 2;
 
-const adaptConfigForPreview = (config: Config): Config => ({
-  ...config,
-
-  // menos poluição
-  MAX_CONCURRENT: 60,
-  NUM_BRANCHES: Math.min(config.NUM_BRANCHES, 3),
-
-  // crescimento visível
-  MIN_GROWTH_RATE: 2,
-  MAX_GROWTH_RATE: 4,
-
-  // MUITO importante: vida maior
-  MIN_SHRINK_RATE: 0.96,
-  MAX_SHRINK_RATE: 0.995,
-
-  // evita morte precoce
-  MIN_RADIUS: 0.05,
-  MAX_RADIUS: config.MAX_RADIUS * 0.3,
-
-  // movimento controlado
-  MIN_WANDER_STEP: 0.05,
-  MAX_WANDER_STEP: 0.3,
-});
-
-export default function MiniCanvasPreview({
-  config,
-  width = 180,
-  height = 120,
-}: {
+interface Props {
   config: Config;
-  width?: number;
-  height?: number;
-}) {
+  resetSignal?: number;
+}
+
+export default function MiniCanvasPreview({ config, resetSignal }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const branchesRef = useRef<Branch[]>([]);
-  const animationRef = useRef<number>(10);
+  const animationRef = useRef<number | null>(null);
+
+  const visibleRef = useRef(true);
+  const isScrollingRef = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;
 
-    const cfg = adaptConfigForPreview(config);
+    const scale = window.devicePixelRatio || 1;
+    const width = 250;
+    const height = 200;
 
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = width * scale;
+    canvas.height = height * scale;
 
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+
+    ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+    // 🔥 SPAWN
     const spawn = () => {
-      for (let i = 0; i < cfg.NUM_BRANCHES; i++) {
-        const theta = (i / cfg.NUM_BRANCHES) * TWO_PI;
+      branchesRef.current = [];
+
+      for (let i = 0; i < config.NUM_BRANCHES; i++) {
+        const theta = (i / config.NUM_BRANCHES) * TWO_PI;
 
         branchesRef.current.push(
           new Branch(
             width / 2,
             height / 2,
             theta - HALF_PI,
-            cfg.MAX_RADIUS,
-            cfg,
+            config.MAX_RADIUS,
+            config,
           ),
         );
       }
     };
 
-    const loop = () => {
-      animationRef.current = requestAnimationFrame(loop);
+    spawn();
 
-      // fundo
-      if (cfg.RENDER_MODE === "darkness") {
-        ctx.fillStyle = "#111";
-        ctx.fillRect(0, 0, width, height);
-      } else {
-        ctx.clearRect(0, 0, width, height);
+    // =========================
+    // 👀 VISIBILITY OBSERVER
+    // =========================
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visibleRef.current = entry.isIntersecting;
+
+        if (entry.isIntersecting && animationRef.current === null) {
+          loop();
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    observer.observe(canvas);
+
+    // =========================
+    // 🖱 SCROLL DETECTION
+    // =========================
+    let scrollTimeout: any = null;
+
+    const handleScroll = () => {
+      isScrollingRef.current = true;
+
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+
+      scrollTimeout = setTimeout(() => {
+        isScrollingRef.current = false;
+
+        // 🔥 volta animação depois do scroll
+        if (visibleRef.current && animationRef.current === null) {
+          loop();
+        }
+      }, 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // =========================
+    // 🎬 LOOP
+    // =========================
+    let animationId: number | null = null;
+
+    const loop = () => {
+      if (!visibleRef.current || isScrollingRef.current) {
+        animationRef.current = null;
+        return;
       }
 
-      branchesRef.current.forEach((b) => {
-        b.update(branchesRef.current, cfg);
-        b.render(ctx, cfg);
-      });
+      animationId = requestAnimationFrame(loop);
+      animationRef.current = animationId;
 
-      branchesRef.current = branchesRef.current.filter((b) => b.growing);
+      // 🔥 fade leve
+      ctx.fillStyle = "rgba(0,0,0,0.05)";
+      ctx.fillRect(0, 0, width, height);
 
-      // respawn suave
-      if (branchesRef.current.length < 5) {
+      const branches = branchesRef.current;
+
+      for (let i = 0; i < branches.length; i++) {
+        const b = branches[i];
+        b.update(branches, config);
+        b.render(ctx, config);
+      }
+
+      branchesRef.current = branches.filter((b) => b.growing);
+
+      if (branchesRef.current.length === 0) {
         spawn();
       }
     };
 
-    spawn();
     loop();
 
-    return () => cancelAnimationFrame(animationRef.current!);
-  }, [config, width, height]);
+    return () => {
+      if (animationId !== null) {
+        cancelAnimationFrame(animationId);
+      }
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [config, resetSignal]);
 
   return <canvas ref={canvasRef} />;
 }
