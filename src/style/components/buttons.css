@@ -1,0 +1,16 @@
+.btn {
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: none;
+
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  color: white;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}

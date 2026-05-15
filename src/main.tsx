@@ -1,5 +1,8 @@
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import "./style/base.css";
+import "./style/layout.css";
+import "./style/tokens.css";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 

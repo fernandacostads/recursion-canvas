@@ -1,0 +1,19 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+}
+
+/* BASE */
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+
+  font-family: "Inter", system-ui, sans-serif;
+
+  background: radial-gradient(circle at top, #1a1a1a, #0d0d0d);
+  color: var(--text-primary);
+}
