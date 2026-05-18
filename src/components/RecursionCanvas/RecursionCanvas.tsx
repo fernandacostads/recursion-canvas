@@ -244,6 +244,9 @@ export default function RecursionCanvas({
   const [config, setConfig] = useState(PRESETS["Vines"]);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isPanelOpen, setIsPanelOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth <= 480 : false,
+  );
 
   useEffect(() => {
     configRef.current = config;
@@ -333,6 +336,15 @@ export default function RecursionCanvas({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    const handleMobileCheck = () => setIsMobile(window.innerWidth <= 480);
+
+    handleMobileCheck();
+    window.addEventListener("resize", handleMobileCheck);
+
+    return () => window.removeEventListener("resize", handleMobileCheck);
+  }, []);
+
   function clearCanvas() {
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;
@@ -351,7 +363,11 @@ export default function RecursionCanvas({
         </button>
       )}
 
-      <div className={`panel-wrapper ${isPanelOpen ? "open" : "closed"}`}>
+      <div
+        className={`panel-wrapper ${isPanelOpen ? "open" : "closed"} ${
+          isMobile ? "mobile" : "desktop"
+        }`}
+      >
         <ControlPanel
           config={config}
           setConfig={setConfig}

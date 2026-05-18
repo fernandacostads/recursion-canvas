@@ -10,10 +10,28 @@ body,
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden;
+  /* allow vertical scrolling but prevent horizontal overflow */
+  overflow-x: hidden;
 
   font-family: "Inter", system-ui, sans-serif;
 
   background: radial-gradient(circle at top, #1a1a1a, #0d0d0d);
   color: var(--text-primary);
+}
+
+/* Responsive root font sizing */
+:root {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    font-size: 14px;
+  }
 }

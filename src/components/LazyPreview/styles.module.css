@@ -1,5 +1,6 @@
 .placeholder {
-  height: 160px;
+  min-height: 10rem;
+  height: auto;
   border-radius: 10px;
   background: #111;
   display: flex;
@@ -9,6 +10,8 @@
   color: #aaa;
   font-size: 0.9rem;
   transition: 0.2s;
+  padding: 0.5rem;
+  width: 100%;
 }
 
 .placeholder:hover {

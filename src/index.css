@@ -10,7 +10,8 @@ body,
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden;
+  /* allow vertical scrolling, prevent horizontal overflow */
+  overflow-x: hidden;
   font-family: "Inter", "SF Pro Display", system-ui, sans-serif;
   background: radial-gradient(circle at top, #1a1a1a, #0d0d0d);
   color: #fff;
@@ -79,6 +80,8 @@ html {
   box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  width: calc(80% - 100px);
+  max-width: 600px;
 }
 
 /* LEFT */
@@ -244,7 +247,7 @@ canvas {
   display: flex;
 
   transition: transform 0.3s ease;
-  z-index: 10;
+  z-index: 60;
 }
 
 /* ABERTO */
@@ -270,7 +273,7 @@ canvas {
   left: 2%;
   /* left: 10px; */
   transform: translateY(-50%);
-  z-index: 20;
+  z-index: 70;
 
   padding: 8px 10px;
   border-radius: 10px;
@@ -568,6 +571,45 @@ canvas {
 .docs-layout {
   display: flex;
   height: 100vh;
+}
+
+/* Responsive docs layout */
+@media (max-width: 1024px) {
+  .docs-layout {
+    height: auto;
+  }
+  .docs-content {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .docs-layout {
+    display: flex;
+    flex-direction: column;
+  }
+  .docs-sidebar {
+    width: 100%;
+    padding: 16px;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  .docs-content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .docs-sidebar {
+    padding: 12px;
+  }
+  .docs-container {
+    padding: 0 12px;
+  }
+  .docs-content {
+    padding: 16px;
+  }
 }
 
 .clickable {
